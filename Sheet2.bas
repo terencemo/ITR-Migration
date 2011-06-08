@@ -108,7 +108,7 @@ End Sub
 
 Function getRangeName(ByVal Target As Range) As String
 Dim start As Integer
-start = Len(Name)
+start = Len(Target.Name)
 
 If InStr(1, Target.Name.Name, "'") > 0 Then
 start = start + 3 + 1
