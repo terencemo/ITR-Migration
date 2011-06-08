@@ -5,12 +5,13 @@ Function IsEmailValid(strEmail)
     Dim strItem As Variant
     Dim i As Long, c As String, blnIsItValid As Boolean
     blnIsItValid = True
-     
-    i = Len(strEmail) - Len(Application.Substitute(strEmail, "@", ""))
-    If i <> 1 Then IsEmailValid = False: Exit Function
+
+    Dim pos%
+    pos = InStr(strEmail, "@")
+    If pos = 0 OR InStr(pos + 1, strEmail, "@") <> 0 Then IsEmailValid = False: Exit Function
     ReDim strArray(1 To 2)
-    strArray(1) = Left(strEmail, InStr(1, strEmail, "@", 1) - 1)
-    strArray(2) = Application.Substitute(Right(strEmail, Len(strEmail) - Len(strArray(1))), "@", "")
+    strArray(1) = Left(strEmail, pos - 1)
+    strArray(2) = Right(strEmail, Len(strEmail) - pos)
     For Each strItem In strArray
         If Len(strItem) <= 0 Then
             blnIsItValid = False
