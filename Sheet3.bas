@@ -77,7 +77,7 @@ start = start + 3 + 1
 Else
 start = start + 1 + 1
 End If
-If InStr(1, Target.Name.Name, ActiveSheet.Name) = 0 Then
+If InStr(1, Target.Name.Name, ThisComponent.CurrentController.getActiveSheet.Name) = 0 Then
 start = 1
 End If
 getRangeName = Mid(Target.Name.Name, start)

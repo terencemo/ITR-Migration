@@ -309,7 +309,7 @@ Function InsertRowsToImport(Optional vRows As Integer = 0)
    msginit21 = Module3.getmsgstate
 
    strpassword = msginit21 + "*"
-   ActiveSheet.Unprotect Password:=strpassword
+   ThisComponent.CurrentController.getActiveSheet.Unprotect Password:=strpassword
 
     
    ActiveCell.EntireRow.Select  'So you do not have to preselect entire row
@@ -338,7 +338,7 @@ Selection.Offset(1).Resize(vRows).EntireRow. _
  SpecialCells(xlCellTypeAllValidation).ClearContents
 '
    Next sht
-ActiveSheet.Protect Password:=strpassword
+ThisComponent.CurrentController.getActiveSheet.Protect Password:=strpassword
    
 End Function
 
@@ -2104,12 +2104,12 @@ Sheet4.Activate
 msginit21 = Module3.getmsgstate
 
 strpassword = msginit21 + "*"
-ActiveSheet.Unprotect Password:=strpassword
+ThisComponent.CurrentController.getActiveSheet.Unprotect Password:=strpassword
 Sheet4.Range("tds1").value = UBound(TAN_TDSal)
 Sheet4.Range("tds2").value = UBound(TAN_TDSoth)
 Sheet4.Range("tp").value = UBound(BSRCode_TaxP)
 
-ActiveSheet.Protect Password:=strpassword
+ThisComponent.CurrentController.getActiveSheet.Protect Password:=strpassword
 MsgBox "To compute Tax and Interest using this utllity, you must click on Compute Tax button and verify the figures before saving the XML. If you have not done so, please do it and then again Generate XML", vbInformation, "Compute Tax"
 End Sub
 Sub Create_XML_FINAL()
@@ -2230,7 +2230,7 @@ Sub insertrowstofillformula()
 'strpassword = msginit21 + "*"
 'ActiveSheet.Unprotect Password:=strPassword
 Call InsertRowsAndFillFormulas
-ActiveSheet.Protect Password:=strpassword
+ThisComponent.CurrentController.getActiveSheet.Protect Password:=strpassword
 
 End Sub
 
@@ -2510,7 +2510,7 @@ Dim newnamerefersto As Variant
 Application.EnableEvents = False
 msginit21 = Module3.getmsgstate
 strpassword = msginit21 + "*"
-ActiveSheet.Unprotect Password:=strpassword
+ThisComponent.CurrentController.getActiveSheet.Unprotect Password:=strpassword
 
 gapbtn = 0
 dcounter = 0
@@ -2557,7 +2557,7 @@ If Counter > 0 Then
 Application.EnableEvents = False
    msginit21 = Module3.getmsgstate
    strpassword = msginit21 + "*"
-   ActiveSheet.Unprotect Password:=strpassword
+   ThisComponent.CurrentController.getActiveSheet.Unprotect Password:=strpassword
 
     Range(blockname & Counter - 1).Copy Destination:=Cells(destinationrowindex, destinationcolumnindex)
 End If
@@ -2654,7 +2654,7 @@ For b = 0 To UBound(newrangeaddress)
         End If
     End If
 Next
-ActiveSheet.Protect Password:=strpassword
+ThisComponent.CurrentController.getActiveSheet.Protect Password:=strpassword
 Application.EnableEvents = True
 End Function
 
@@ -2664,7 +2664,7 @@ Function InsertBlock(vRows1 As Variant)
 Application.EnableEvents = False
 msginit21 = Module3.getmsgstate
 strpassword = msginit21 + "*"
-ActiveSheet.Unprotect Password:=strpassword
+ThisComponent.CurrentController.getActiveSheet.Unprotect Password:=strpassword
 '
 
    
@@ -2709,7 +2709,7 @@ ActiveSheet.Unprotect Password:=strpassword
    Worksheets(shts).Select
    'InsertRowsAndFillFormulas = vRows
    
-ActiveSheet.Protect Password:=strpassword
+ThisComponent.CurrentController.getActiveSheet.Protect Password:=strpassword
 Application.EnableEvents = True
    
 End Function
@@ -2743,7 +2743,7 @@ Function InsertRowsAndFillFormulas(Optional vRows As Long = 0) As Integer
     
   msginit21 = Module3.getmsgstate
 strpassword = msginit21 + "*"
-ActiveSheet.Unprotect Password:=strpassword
+ThisComponent.CurrentController.getActiveSheet.Unprotect Password:=strpassword
    
    Dim sht As Worksheet, shts() As String, i As Integer
    ReDim shts(1 To Worksheets.Application.ActiveWorkbook. _
@@ -2773,7 +2773,7 @@ Selection.Offset(1).Resize(vRows).EntireRow. _
    Next sht
    Worksheets(shts).Select
    InsertRowsAndFillFormulas = vRows
-ActiveSheet.Protect Password:=strpassword
+ThisComponent.CurrentController.getActiveSheet.Protect Password:=strpassword
    
 End Function
 
