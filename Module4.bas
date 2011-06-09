@@ -250,7 +250,7 @@ Function Calculate_InterestPayable234A(SYSCALCGrossTaxLiability As Double, match
       'decVal = CLng(taxbase234A)
       'taxbase234A = decVal * 100
       'delayedInMonths = monthdiff2(Sheet5.Range("duedate").value, Sheet5.Range("dateoffiling").value)
-      delayedInMonths = monthdiff2("01/08/2011", Sheet5.Range("dateoffiling").value)
+      delayedInMonths = monthdiff2("01/08/2011", ThisComponent.Sheets.getByName("Sheet5").Range("dateoffiling").value)
       If (delayedInMonths > 0) Then
         calcInterestPayable234A = CONST_IntrstPay234A_Percentage / 100 * taxbase234A * delayedInMonths
       End If
@@ -263,7 +263,8 @@ Function Calculate_InterestPayable234AR(intrstcomp As Object) As Double
         taxbase234AR = taxbase234AR / 100
         decVal = CInt(cintaxbase234AR)
          taxbase234AR = decVal * 100
-         delayedInMonths = CalculateDelayedInMonths(Sheet5.Range("dateoffiling").value, Sheet1.Range("sheet1.OrigRetFiledDate").value)
+         delayedInMonths = CalculateDelayedInMonths(ThisComponent.Sheets.getByName("Sheet5").Range("dateoffiling").value, _
+            ThisComponent.Sheets.getByName("Sheet1").Range("sheet1.OrigRetFiledDate").value)
          calcInterestPayable234AR = CONST_IntrstPay234A_Percentage / 100 * taxbase234AR * delayedInMonths
          Calculate_InterestPayable234AR = calcInterestPayable234AR
 End Function
@@ -272,11 +273,11 @@ Function Calculate_InterestPayable234B(intrstPayable234A As Double, intrstPayabl
       calcIntrstPayable234B = 0
       Dim matchedAdvanceTax As Double
       
-      matchedAdvanceTax = Sheet2.Range("IncD.AdvanceTax").value
-      GAT = Sheet5.Range("GAT").value
+      matchedAdvanceTax = ThisComponent.Sheets.getByName("Sheet2").Range("IncD.AdvanceTax").value
+      GAT = ThisComponent.Sheets.getByName("Sheet5").Range("GAT").value
       'GAT - grossAssessedTax = WorksheetFunction.Max(0, SYSCALCGrossTaxLiability - (TDSAmtUsed + intrstPayable234B.interestSupplements.TCSPaid + intrstPayable234B.interestSupplements.section89 + intrstPayable234B.interestSupplements.section90 + intrstPayable234B.interestSupplements.section91 + intrstPayable234B.interestSupplements.creditUs115JAA))
       'GATR = WorksheetFunction.Max(0, intrstPayable234B.ITRInterest.ITRGrossTaxLiability - (TDSAmtUsed + intrstPayable234B.interestSupplements.TCSPaid + intrstPayable234B.interestSupplements.section89 + intrstPayable234B.interestSupplements.section90 + intrstPayable234B.interestSupplements.section91 + intrstPayable234B.interestSupplements.creditUs115JAA))
-      GAT = Sheet5.Range("GATS").value
+      GAT = ThisComponent.Sheets.getByName("Sheet5").Range("GATS").value
       If (GAT > CONST_GAT_Limit And matchedAdvanceTax < CONST_ATP_Limit / 100 * GAT) Then
             'shortFall = WorksheetFunction.Max(0, grossAssessedTax - intrstPayable234B.interestSupplements.matchedAdvanceTax)
             'shortFallR = WorksheetFunction.Max(0, GATR - intrstPayable234B.interestSupplements.matchedAdvanceTax)
@@ -304,7 +305,7 @@ Function Calculate_InterestPayable234B(intrstPayable234A As Double, intrstPayabl
                  calcIntrst234BOnPeriodR = 0
                  calcIntrst234BUptoPeriod = 0
             End If
-       dateOfProcessing = Sheet5.Range("dateoffiling").value
+       dateOfProcessing = ThisComponent.Sheets.getByName("Sheet5").Range("dateoffiling").value
        assYear = 2011
         Dim yrdop As Integer
         Dim mthdop As Integer
@@ -327,7 +328,7 @@ Function Calculate_InterestPayable234B(intrstPayable234A As Double, intrstPayabl
                     calcIntrstPayable234B = calcIntrstPayable234B + calcIntrst234BOnPeriod
                     balanceInterest = intrstPayable234A + calcIntrst234BOnPeriod + intrstPayable234C
                   
-                     SATPaidAtPeriod = SATPaidAtPeriod + Sheet3.Range("Sat1").value
+                     SATPaidAtPeriod = SATPaidAtPeriod + ThisComponent.Sheets.getByName("Sheet3").Range("Sat1").value
                 
                      adjustedInterest = WorksheetFunction.Min(SATPaidAtPeriod, balanceInterest)
                      adjustedPrincipal = WorksheetFunction.Max(0, WorksheetFunction.Min(SATPaidAtPeriod - adjustedInterest, balancePrincipal))
@@ -342,7 +343,7 @@ Function Calculate_InterestPayable234B(intrstPayable234A As Double, intrstPayabl
                     calcIntrstPayable234B = calcIntrstPayable234B + calcIntrst234BOnPeriod
                     balanceInterest = carryForwardInterest + calcIntrst234BOnPeriod
                   
-                     SATPaidAtPeriod = SATPaidAtPeriod + Sheet3.Range("Sat2").value
+                     SATPaidAtPeriod = SATPaidAtPeriod + ThisComponent.Sheets.getByName("Sheet3").Range("Sat2").value
                 
                      adjustedInterest = WorksheetFunction.Min(SATPaidAtPeriod, balanceInterest)
                      adjustedPrincipal = WorksheetFunction.Max(0, WorksheetFunction.Min(SATPaidAtPeriod - adjustedInterest, balancePrincipal))
@@ -357,7 +358,7 @@ Function Calculate_InterestPayable234B(intrstPayable234A As Double, intrstPayabl
                     calcIntrstPayable234B = calcIntrstPayable234B + calcIntrst234BOnPeriod
                     balanceInterest = carryForwardInterest + calcIntrst234BOnPeriod
                   
-                     SATPaidAtPeriod = SATPaidAtPeriod + Sheet3.Range("Sat3").value
+                     SATPaidAtPeriod = SATPaidAtPeriod + ThisComponent.Sheets.getByName("Sheet3").Range("Sat3").value
                 
                      adjustedInterest = WorksheetFunction.Min(SATPaidAtPeriod, balanceInterest)
                      adjustedPrincipal = WorksheetFunction.Max(0, WorksheetFunction.Min(SATPaidAtPeriod - adjustedInterest, balancePrincipal))
@@ -372,7 +373,7 @@ Function Calculate_InterestPayable234B(intrstPayable234A As Double, intrstPayabl
                     calcIntrstPayable234B = calcIntrstPayable234B + calcIntrst234BOnPeriod
                     balanceInterest = carryForwardInterest + calcIntrst234BOnPeriod
                   
-                     SATPaidAtPeriod = SATPaidAtPeriod + Sheet3.Range("Sat4").value
+                     SATPaidAtPeriod = SATPaidAtPeriod + ThisComponent.Sheets.getByName("Sheet3").Range("Sat4").value
                 
                      adjustedInterest = WorksheetFunction.Min(SATPaidAtPeriod, balanceInterest)
                      adjustedPrincipal = WorksheetFunction.Max(0, WorksheetFunction.Min(SATPaidAtPeriod - adjustedInterest, balancePrincipal))
@@ -387,7 +388,7 @@ Function Calculate_InterestPayable234B(intrstPayable234A As Double, intrstPayabl
                     calcIntrstPayable234B = calcIntrstPayable234B + calcIntrst234BOnPeriod
                     balanceInterest = carryForwardInterest + calcIntrst234BOnPeriod
                   
-                     SATPaidAtPeriod = SATPaidAtPeriod + Sheet3.Range("Sat5").value
+                     SATPaidAtPeriod = SATPaidAtPeriod + ThisComponent.Sheets.getByName("Sheet3").Range("Sat5").value
                 
                      adjustedInterest = WorksheetFunction.Min(SATPaidAtPeriod, balanceInterest)
                      adjustedPrincipal = WorksheetFunction.Max(0, WorksheetFunction.Min(SATPaidAtPeriod - adjustedInterest, balancePrincipal))
@@ -402,7 +403,7 @@ Function Calculate_InterestPayable234B(intrstPayable234A As Double, intrstPayabl
                     calcIntrstPayable234B = calcIntrstPayable234B + calcIntrst234BOnPeriod
                     balanceInterest = carryForwardInterest + calcIntrst234BOnPeriod
                   
-                     SATPaidAtPeriod = SATPaidAtPeriod + Sheet3.Range("Sat6").value
+                     SATPaidAtPeriod = SATPaidAtPeriod + ThisComponent.Sheets.getByName("Sheet3").Range("Sat6").value
                 
                      adjustedInterest = WorksheetFunction.Min(SATPaidAtPeriod, balanceInterest)
                      adjustedPrincipal = WorksheetFunction.Max(0, WorksheetFunction.Min(SATPaidAtPeriod - adjustedInterest, balancePrincipal))
@@ -417,7 +418,7 @@ Function Calculate_InterestPayable234B(intrstPayable234A As Double, intrstPayabl
                     calcIntrstPayable234B = calcIntrstPayable234B + calcIntrst234BOnPeriod
                     balanceInterest = carryForwardInterest + calcIntrst234BOnPeriod
                   
-                     SATPaidAtPeriod = SATPaidAtPeriod + Sheet3.Range("Sat7").value
+                     SATPaidAtPeriod = SATPaidAtPeriod + ThisComponent.Sheets.getByName("Sheet3").Range("Sat7").value
                 
                      adjustedInterest = WorksheetFunction.Min(SATPaidAtPeriod, balanceInterest)
                      adjustedPrincipal = WorksheetFunction.Max(0, WorksheetFunction.Min(SATPaidAtPeriod - adjustedInterest, balancePrincipal))
@@ -432,7 +433,7 @@ Function Calculate_InterestPayable234B(intrstPayable234A As Double, intrstPayabl
                     calcIntrstPayable234B = calcIntrstPayable234B + calcIntrst234BOnPeriod
                     balanceInterest = carryForwardInterest + calcIntrst234BOnPeriod
                   
-                     SATPaidAtPeriod = SATPaidAtPeriod + Sheet3.Range("Sat8").value
+                     SATPaidAtPeriod = SATPaidAtPeriod + ThisComponent.Sheets.getByName("Sheet3").Range("Sat8").value
                 
                      adjustedInterest = WorksheetFunction.Min(SATPaidAtPeriod, balanceInterest)
                      adjustedPrincipal = WorksheetFunction.Max(0, WorksheetFunction.Min(SATPaidAtPeriod - adjustedInterest, balancePrincipal))
@@ -447,7 +448,7 @@ Function Calculate_InterestPayable234B(intrstPayable234A As Double, intrstPayabl
                     calcIntrstPayable234B = calcIntrstPayable234B + calcIntrst234BOnPeriod
                     balanceInterest = carryForwardInterest + calcIntrst234BOnPeriod
                   
-                     SATPaidAtPeriod = SATPaidAtPeriod + Sheet3.Range("Sat9").value
+                     SATPaidAtPeriod = SATPaidAtPeriod + ThisComponent.Sheets.getByName("Sheet3").Range("Sat9").value
                 
                      adjustedInterest = WorksheetFunction.Min(SATPaidAtPeriod, balanceInterest)
                      adjustedPrincipal = WorksheetFunction.Max(0, WorksheetFunction.Min(SATPaidAtPeriod - adjustedInterest, balancePrincipal))
@@ -462,7 +463,7 @@ Function Calculate_InterestPayable234B(intrstPayable234A As Double, intrstPayabl
                     calcIntrstPayable234B = calcIntrstPayable234B + calcIntrst234BOnPeriod
                     balanceInterest = carryForwardInterest + calcIntrst234BOnPeriod
                   
-                     SATPaidAtPeriod = SATPaidAtPeriod + Sheet3.Range("Sat10").value
+                     SATPaidAtPeriod = SATPaidAtPeriod + ThisComponent.Sheets.getByName("Sheet3").Range("Sat10").value
                 
                      adjustedInterest = WorksheetFunction.Min(SATPaidAtPeriod, balanceInterest)
                      adjustedPrincipal = WorksheetFunction.Max(0, WorksheetFunction.Min(SATPaidAtPeriod - adjustedInterest, balancePrincipal))
@@ -477,7 +478,7 @@ Function Calculate_InterestPayable234B(intrstPayable234A As Double, intrstPayabl
                     calcIntrstPayable234B = calcIntrstPayable234B + calcIntrst234BOnPeriod
                     balanceInterest = carryForwardInterest + calcIntrst234BOnPeriod
                   
-                     SATPaidAtPeriod = SATPaidAtPeriod + Sheet3.Range("Sat11").value
+                     SATPaidAtPeriod = SATPaidAtPeriod + ThisComponent.Sheets.getByName("Sheet3").Range("Sat11").value
                 
                      adjustedInterest = WorksheetFunction.Min(SATPaidAtPeriod, balanceInterest)
                      adjustedPrincipal = WorksheetFunction.Max(0, WorksheetFunction.Min(SATPaidAtPeriod - adjustedInterest, balancePrincipal))
@@ -493,7 +494,7 @@ Function Calculate_InterestPayable234B(intrstPayable234A As Double, intrstPayabl
                     calcIntrstPayable234B = calcIntrstPayable234B + calcIntrst234BOnPeriod
                     balanceInterest = carryForwardInterest + calcIntrst234BOnPeriod
                   
-                     SATPaidAtPeriod = SATPaidAtPeriod + Sheet3.Range("Sat12").value
+                     SATPaidAtPeriod = SATPaidAtPeriod + ThisComponent.Sheets.getByName("Sheet3").Range("Sat12").value
                 
                      adjustedInterest = WorksheetFunction.Min(SATPaidAtPeriod, balanceInterest)
                      adjustedPrincipal = WorksheetFunction.Max(0, WorksheetFunction.Min(SATPaidAtPeriod - adjustedInterest, balancePrincipal))
@@ -508,7 +509,7 @@ Function Calculate_InterestPayable234B(intrstPayable234A As Double, intrstPayabl
                     calcIntrstPayable234B = calcIntrstPayable234B + calcIntrst234BOnPeriod
                     balanceInterest = carryForwardInterest + calcIntrst234BOnPeriod
                   
-                     SATPaidAtPeriod = SATPaidAtPeriod + Sheet3.Range("Sat13").value
+                     SATPaidAtPeriod = SATPaidAtPeriod + ThisComponent.Sheets.getByName("Sheet3").Range("Sat13").value
                 
                      adjustedInterest = WorksheetFunction.Min(SATPaidAtPeriod, balanceInterest)
                      adjustedPrincipal = WorksheetFunction.Max(0, WorksheetFunction.Min(SATPaidAtPeriod - adjustedInterest, balancePrincipal))
@@ -523,7 +524,7 @@ Function Calculate_InterestPayable234B(intrstPayable234A As Double, intrstPayabl
                     calcIntrstPayable234B = calcIntrstPayable234B + calcIntrst234BOnPeriod
                     balanceInterest = carryForwardInterest + calcIntrst234BOnPeriod
                   
-                     SATPaidAtPeriod = SATPaidAtPeriod + Sheet3.Range("Sat14").value
+                     SATPaidAtPeriod = SATPaidAtPeriod + ThisComponent.Sheets.getByName("Sheet3").Range("Sat14").value
                 
                      adjustedInterest = WorksheetFunction.Min(SATPaidAtPeriod, balanceInterest)
                      adjustedPrincipal = WorksheetFunction.Max(0, WorksheetFunction.Min(SATPaidAtPeriod - adjustedInterest, balancePrincipal))
@@ -539,7 +540,7 @@ Function Calculate_InterestPayable234B(intrstPayable234A As Double, intrstPayabl
                     calcIntrstPayable234B = calcIntrstPayable234B + calcIntrst234BOnPeriod
                     balanceInterest = carryForwardInterest + calcIntrst234BOnPeriod
                   
-                     SATPaidAtPeriod = SATPaidAtPeriod + Sheet3.Range("Sat15").value
+                     SATPaidAtPeriod = SATPaidAtPeriod + ThisComponent.Sheets.getByName("Sheet3").Range("Sat15").value
                 
                      adjustedInterest = WorksheetFunction.Min(SATPaidAtPeriod, balanceInterest)
                      adjustedPrincipal = WorksheetFunction.Max(0, WorksheetFunction.Min(SATPaidAtPeriod - adjustedInterest, balancePrincipal))
@@ -555,7 +556,7 @@ Function Calculate_InterestPayable234B(intrstPayable234A As Double, intrstPayabl
                     calcIntrstPayable234B = calcIntrstPayable234B + calcIntrst234BOnPeriod
                     balanceInterest = carryForwardInterest + calcIntrst234BOnPeriod
                   
-                     SATPaidAtPeriod = SATPaidAtPeriod + Sheet3.Range("Sat16").value
+                     SATPaidAtPeriod = SATPaidAtPeriod + ThisComponent.Sheets.getByName("Sheet3").Range("Sat16").value
                 
                      adjustedInterest = WorksheetFunction.Min(SATPaidAtPeriod, balanceInterest)
                      adjustedPrincipal = WorksheetFunction.Max(0, WorksheetFunction.Min(SATPaidAtPeriod - adjustedInterest, balancePrincipal))
@@ -570,7 +571,7 @@ Function Calculate_InterestPayable234B(intrstPayable234A As Double, intrstPayabl
                     calcIntrstPayable234B = calcIntrstPayable234B + calcIntrst234BOnPeriod
                     balanceInterest = carryForwardInterest + calcIntrst234BOnPeriod
                   
-                     SATPaidAtPeriod = SATPaidAtPeriod + Sheet3.Range("Sat17").value
+                     SATPaidAtPeriod = SATPaidAtPeriod + ThisComponent.Sheets.getByName("Sheet3").Range("Sat17").value
                 
                      adjustedInterest = WorksheetFunction.Min(SATPaidAtPeriod, balanceInterest)
                      adjustedPrincipal = WorksheetFunction.Max(0, WorksheetFunction.Min(SATPaidAtPeriod - adjustedInterest, balancePrincipal))
@@ -585,7 +586,7 @@ Function Calculate_InterestPayable234B(intrstPayable234A As Double, intrstPayabl
                     calcIntrstPayable234B = calcIntrstPayable234B + calcIntrst234BOnPeriod
                     balanceInterest = carryForwardInterest + calcIntrst234BOnPeriod
                   
-                     SATPaidAtPeriod = SATPaidAtPeriod + Sheet3.Range("Sat18").value
+                     SATPaidAtPeriod = SATPaidAtPeriod + ThisComponent.Sheets.getByName("Sheet3").Range("Sat18").value
                 
                      adjustedInterest = WorksheetFunction.Min(SATPaidAtPeriod, balanceInterest)
                      adjustedPrincipal = WorksheetFunction.Max(0, WorksheetFunction.Min(SATPaidAtPeriod - adjustedInterest, balancePrincipal))
@@ -600,7 +601,7 @@ Function Calculate_InterestPayable234B(intrstPayable234A As Double, intrstPayabl
                     calcIntrstPayable234B = calcIntrstPayable234B + calcIntrst234BOnPeriod
                     balanceInterest = carryForwardInterest + calcIntrst234BOnPeriod
                   
-                     SATPaidAtPeriod = SATPaidAtPeriod + Sheet3.Range("Sat19").value
+                     SATPaidAtPeriod = SATPaidAtPeriod + ThisComponent.Sheets.getByName("Sheet3").Range("Sat19").value
                 
                      adjustedInterest = WorksheetFunction.Min(SATPaidAtPeriod, balanceInterest)
                      adjustedPrincipal = WorksheetFunction.Max(0, WorksheetFunction.Min(SATPaidAtPeriod - adjustedInterest, balancePrincipal))
@@ -615,7 +616,7 @@ Function Calculate_InterestPayable234B(intrstPayable234A As Double, intrstPayabl
                     calcIntrstPayable234B = calcIntrstPayable234B + calcIntrst234BOnPeriod
                     balanceInterest = carryForwardInterest + calcIntrst234BOnPeriod
                   
-                     SATPaidAtPeriod = SATPaidAtPeriod + Sheet3.Range("Sat20").value
+                     SATPaidAtPeriod = SATPaidAtPeriod + ThisComponent.Sheets.getByName("Sheet3").Range("Sat20").value
                 
                      adjustedInterest = WorksheetFunction.Min(SATPaidAtPeriod, balanceInterest)
                      adjustedPrincipal = WorksheetFunction.Max(0, WorksheetFunction.Min(SATPaidAtPeriod - adjustedInterest, balancePrincipal))
@@ -630,7 +631,7 @@ Function Calculate_InterestPayable234B(intrstPayable234A As Double, intrstPayabl
                     calcIntrstPayable234B = calcIntrstPayable234B + calcIntrst234BOnPeriod
                     balanceInterest = carryForwardInterest + calcIntrst234BOnPeriod
                   
-                     SATPaidAtPeriod = SATPaidAtPeriod + Sheet3.Range("Sat21").value
+                     SATPaidAtPeriod = SATPaidAtPeriod + ThisComponent.Sheets.getByName("Sheet3").Range("Sat21").value
                 
                      adjustedInterest = WorksheetFunction.Min(SATPaidAtPeriod, balanceInterest)
                      adjustedPrincipal = WorksheetFunction.Max(0, WorksheetFunction.Min(SATPaidAtPeriod - adjustedInterest, balancePrincipal))
@@ -645,7 +646,7 @@ Function Calculate_InterestPayable234B(intrstPayable234A As Double, intrstPayabl
                     calcIntrstPayable234B = calcIntrstPayable234B + calcIntrst234BOnPeriod
                     balanceInterest = carryForwardInterest + calcIntrst234BOnPeriod
                   
-                     SATPaidAtPeriod = SATPaidAtPeriod + Sheet3.Range("Sat22").value
+                     SATPaidAtPeriod = SATPaidAtPeriod + ThisComponent.Sheets.getByName("Sheet3").Range("Sat22").value
                 
                      adjustedInterest = WorksheetFunction.Min(SATPaidAtPeriod, balanceInterest)
                      adjustedPrincipal = WorksheetFunction.Max(0, WorksheetFunction.Min(SATPaidAtPeriod - adjustedInterest, balancePrincipal))
@@ -660,7 +661,7 @@ Function Calculate_InterestPayable234B(intrstPayable234A As Double, intrstPayabl
                     calcIntrstPayable234B = calcIntrstPayable234B + calcIntrst234BOnPeriod
                     balanceInterest = carryForwardInterest + calcIntrst234BOnPeriod
                   
-                     SATPaidAtPeriod = SATPaidAtPeriod + Sheet3.Range("Sat23").value
+                     SATPaidAtPeriod = SATPaidAtPeriod + ThisComponent.Sheets.getByName("Sheet3").Range("Sat23").value
                 
                      adjustedInterest = WorksheetFunction.Min(SATPaidAtPeriod, balanceInterest)
                      adjustedPrincipal = WorksheetFunction.Max(0, WorksheetFunction.Min(SATPaidAtPeriod - adjustedInterest, balancePrincipal))
@@ -675,7 +676,7 @@ Function Calculate_InterestPayable234B(intrstPayable234A As Double, intrstPayabl
                     calcIntrstPayable234B = calcIntrstPayable234B + calcIntrst234BOnPeriod
                     balanceInterest = carryForwardInterest + calcIntrst234BOnPeriod
                   
-                     SATPaidAtPeriod = SATPaidAtPeriod + Sheet3.Range("Sat24").value
+                     SATPaidAtPeriod = SATPaidAtPeriod + ThisComponent.Sheets.getByName("Sheet3").Range("Sat24").value
                 
                      adjustedInterest = WorksheetFunction.Min(SATPaidAtPeriod, balanceInterest)
                      adjustedPrincipal = WorksheetFunction.Max(0, WorksheetFunction.Min(SATPaidAtPeriod - adjustedInterest, balancePrincipal))
@@ -735,7 +736,7 @@ Function Calculate_InterestPayable234C(SYSCALCGrossTaxLiability As Double, match
 
           'If (income <> Null And lotteryIncUs115BB <> Null And quaterAmounts <> Null) Then
          ' Lottery Income Under Section 115BB Quater wise Total
-              qtrwiseLotteryIncUs115BBTotal = Sheet12.Range("os.WinLottRacePuzz").value
+              qtrwiseLotteryIncUs115BBTotal = ThisComponent.Sheets.getByName("Sheet12").Range("os.WinLottRacePuzz").value
               'WorksheetFunction.Max(0, Math.Round(amountQuater1)) + WorksheetFunction.Max(0, Math.Round(amountQuater2)) + WorksheetFunction.Max(0, Math.Round(amountQuater3)) + WorksheetFunction.Max(0, Math.Round(amountQuater4)) + WorksheetFunction.Max(0, Math.Round(amountQuater5))
           'End If
 
@@ -854,13 +855,13 @@ Function Calculate_InterestPayable234C(SYSCALCGrossTaxLiability As Double, match
          LotteryIncUs115BBQ5 = 0
             
           ' Non-Corporate Second Quater Variable Declarations
-              LTCGProvNotExerQ2 = Math.Round(Sheet12.Range("LTCGAssNo.BalLTCGNo112").value)
+              LTCGProvNotExerQ2 = Math.Round(ThisComponent.Sheets.getByName("Sheet12").Range("LTCGAssNo.BalLTCGNo112").value)
 
-              LTCGProvExerQ2 = Math.Round(Sheet12.Range("LTCG.BalLTCG112").value)
+              LTCGProvExerQ2 = Math.Round(ThisComponent.Sheets.getByName("Sheet12").Range("LTCG.BalLTCG112").value)
 
-              STCGIncUs111AQ2 = Math.Round(Sheet6.Range("Sheet8b.TotalShortTerm").value)
+              STCGIncUs111AQ2 = Math.Round(ThisComponent.Sheets.getByName("Sheet6").Range("Sheet8b.TotalShortTerm").value)
 
-              LotteryIncUs115BBQ2 = Math.Round(Sheet12.Range(" os.WinLottRacePuzz").value)
+              LotteryIncUs115BBQ2 = Math.Round(ThisComponent.Sheets.getByName("Sheet12").Range(" os.WinLottRacePuzz").value)
 
 '              LTCGProvNotExerQ3 = Math.Round(WorksheetFunction.Max(0, amountQuater3))
 '              LTCGProvNotExerQ4 = Math.Round(WorksheetFunction.Max(0, amountQuater4))
@@ -902,7 +903,7 @@ Function Calculate_InterestPayable234C(SYSCALCGrossTaxLiability As Double, match
 
                 'LTCGProvExerQ1 = Math.Round(amountQuater1)
 
-                STCGIncUs111AQ1 = Math.Round(Sheet12.Range("AccSTCG.Upto15Of9").value)
+                STCGIncUs111AQ1 = Math.Round(ThisComponent.Sheets.getByName("Sheet12").Range("AccSTCG.Upto15Of9").value)
 
                 'LotteryIncUs115BBQ1 = Math.Round(amountQuater1)
           
@@ -915,11 +916,11 @@ Function Calculate_InterestPayable234C(SYSCALCGrossTaxLiability As Double, match
 
                 LotteryIncUs115BBQ2 = LotteryIncUs115BBQ2 + calcLotteryIncUs115BB - qtrwiseLotteryIncUs115BBTotal
 
-            advanceTaxPaidQ1 = Sheet3.Range("Qtr1").value
-            advanceTaxPaidQ2 = Sheet3.Range("Qtr2").value
-            advanceTaxPaidQ3 = Sheet3.Range("Qtr3").value
-            advanceTaxPaidQ4 = Sheet3.Range("Qtr4").value
-            advanceTaxPaidQ5 = Sheet3.Range("Qtr5").value
+            advanceTaxPaidQ1 = ThisComponent.Sheets.getByName("Sheet3").Range("Qtr1").value
+            advanceTaxPaidQ2 = ThisComponent.Sheets.getByName("Sheet3").Range("Qtr2").value
+            advanceTaxPaidQ3 = ThisComponent.Sheets.getByName("Sheet3").Range("Qtr3").value
+            advanceTaxPaidQ4 = ThisComponent.Sheets.getByName("Sheet3").Range("Qtr4").value
+            advanceTaxPaidQ5 = ThisComponent.Sheets.getByName("Sheet3").Range("Qtr5").value
 
           ' Calculation Gross Assessed Tax (GAT).
             grossAssessedTax = WorksheetFunction.Max(0, SYSCALCGrossTaxLiability - (TDSAmtUsed + section89 + section90 + section91 + Math.Round(calcLTCGProvisoNotExer * CONST_LTCGNoProviso_TaxRate / 100) + Math.Round(calcLTCGProvisoExer * CONST_LTCGProviso_TaxRate / 100) + Math.Round(calcSTCGIncUs111A * CONST_STCG_TaxRate / 100) + Math.Round(calcLotteryIncUs115BB * CONST_WinningFromLotteryIncome_TaxRate / 100)))
@@ -1281,7 +1282,7 @@ Function Calculate_InterestPayable234CR(intrstPayable234C As Variant) As Double
                   Y4 = 0
                   Y5 = 0
 
-         If (Sheet1.Range("formname").value = 6) Then
+         If (ThisComponent.Sheets.getByName("Sheet1").Range("formname").value = 6) Then
                 If (H1 <= CONST_Corporate_Percentage1 * G1) Then
                        Y1 = WorksheetFunction.Max(0, Math.Round(CONST_Intrst234C_Fix_Months * CONST_Intrst234C_Percentage / 100 * (G1 - H1)))
                 End If
@@ -1423,37 +1424,37 @@ Call Module3.filingdate
 
 
 
-SYSCALCGrossTaxLiability = Sheet5.Range("GTLR").value
+SYSCALCGrossTaxLiability = ThisComponent.Sheets.getByName("Sheet5").Range("GTLR").value
 ' INSTEAD OF THIS IF U USE GTLS IT WILL BE SYS. NOW IT IS AS PER RETURN.
 
-matchedAdvanceTax = Sheet2.Range("IncD.AdvanceTax").value
-TDSAmtUsed = Sheet2.Range("IncD.TDS").value
-section89 = Sheet1.Range("IncD.Section89").value
-section90 = Sheet1.Range("IncD.Section90and91").value
+matchedAdvanceTax = ThisComponent.Sheets.getByName("Sheet2").Range("IncD.AdvanceTax").value
+TDSAmtUsed = ThisComponent.Sheets.getByName("Sheet2").Range("IncD.TDS").value
+section89 = ThisComponent.Sheets.getByName("Sheet1").Range("IncD.Section89").value
+section90 = ThisComponent.Sheets.getByName("Sheet1").Range("IncD.Section90and91").value
 section91 = 0
 
        intrstPayUs234A = Calculate_InterestPayable234A(SYSCALCGrossTaxLiability, matchedAdvanceTax, TDSAmtUsed, section89, section90, section91)
-       Sheet5.Range("Calc_234A").value = Round(intrstPayUs234A)
+       ThisComponent.Sheets.getByName("Sheet5").Range("Calc_234A").value = Round(intrstPayUs234A)
        
        
 '       intrstPayUs234AR = Calculate_InterestPayable234AR(InterestComputationType)
                
         Dim gatt As Long
-        gatt = Sheet5.Range("GAT").value
+        gatt = ThisComponent.Sheets.getByName("Sheet5").Range("GAT").value
         'intrstPayUs234C = Calculate_InterestPayable234C(SYSCALCGrossTaxLiability, matchedAdvanceTax, TDSAmtUsed, section89, section90, section91)
-        intrstPayUs234C = Sheet5.Range("int234C").value
-        gatt = Sheet5.Range("GATS").value
+        intrstPayUs234C = ThisComponent.Sheets.getByName("Sheet5").Range("int234C").value
+        gatt = ThisComponent.Sheets.getByName("Sheet5").Range("GATS").value
         
         If (gatt < 10000) Then
         intrstPayUs234C = 0
         End If
         
         
-        Sheet5.Range("Calc_234C").value = Round(intrstPayUs234C)
+        ThisComponent.Sheets.getByName("Sheet5").Range("Calc_234C").value = Round(intrstPayUs234C)
         
         'intrstPayUs234C = 6431
         intrstPayUs234B = Calculate_InterestPayable234B(intrstPayUs234A, intrstPayUs234C)
-        Sheet5.Range("Calc_234B").value = Round(intrstPayUs234B)
+        ThisComponent.Sheets.getByName("Sheet5").Range("Calc_234B").value = Round(intrstPayUs234B)
 '       intrstPayUs234CR = Calculate_InterestPayable234CR(InterestComputationType)
 '       totalInrstPay = Calculate_TotalInterestPay(intrstPayUs234A, intrstPayUs234B, intrstPayUs234CR)
 '       aggTaxInterestLiability = Calculate_TotalTaxPlusInterestPay(totalInrstPay, SYSCALCGrossTaxLiability, section89, section90, section91)

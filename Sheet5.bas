@@ -9,10 +9,11 @@ Sheet5.Protect msginit21 + "*"
 End Sub
 Public Sub cmdInterestTransfer_Click()
 On Error Resume Next
-Sheet1.Range("IncD.IntrstPayUs234A").value = Sheet5.Range("Calc_234A").value
-Sheet1.Range("IncD.IntrstPayUs234B").value = Sheet5.Range("Calc_234B").value
-Sheet1.Range("IncD.IntrstPayUs234C").value = Sheet5.Range("Calc_234C").value
-Sheet1.Range("IncD.TotalIntrstPay").value = Sheet5.Range("Calc_234A").value + Sheet5.Range("Calc_234B").value + Sheet5.Range("Calc_234C").value
+ThisComponent.Sheets.getByName("Sheet1").Range("IncD.IntrstPayUs234A").value = ThisComponent.Sheets.getByName("Sheet5").Range("Calc_234A").value
+ThisComponent.Sheets.getByName("Sheet1").Range("IncD.IntrstPayUs234B").value = ThisComponent.Sheets.getByName("Sheet5").Range("Calc_234B").value
+ThisComponent.Sheets.getByName("Sheet1").Range("IncD.IntrstPayUs234C").value = ThisComponent.Sheets.getByName("Sheet5").Range("Calc_234C").value
+ThisComponent.Sheets.getByName("Sheet1").Range("IncD.TotalIntrstPay").value = ThisComponent.Sheets.getByName("Sheet5").Range("Calc_234A").value + _
+    ThisComponent.Sheets.getByName("Sheet5").Range("Calc_234B").value + ThisComponent.Sheets.getByName("Sheet5").Range("Calc_234C").value
 msginit21 = Module3.getmsgstate
 Sheet1.Protect msginit21 + "*"
 Sheet5.Protect msginit21 + "*"
@@ -26,11 +27,11 @@ Sheet5.Protect msginit21 + "*"
 End Sub
 Public Sub cmdTaxTransfer_Click()
 On Error Resume Next
-Sheet1.Range("IncD.TotalTaxPayable").value = Sheet5.Range("TXN_Calc").value
-Sheet1.Range("IncD.RebateOnAgriInc").value = 0
-Sheet1.Range("IncD.RebateOnAgriInc").value = 0
-Sheet1.Range("IncD.SurchargeOnTaxPayable").value = 0
-Sheet1.Range("IncD.EducationCess").value = Sheet5.Range("Calc_ED").value
+ThisComponent.Sheets.getByName("Sheet1").Range("IncD.TotalTaxPayable").value = ThisComponent.Sheets.getByName("Sheet5").Range("TXN_Calc").value
+ThisComponent.Sheets.getByName("Sheet1").Range("IncD.RebateOnAgriInc").value = 0
+ThisComponent.Sheets.getByName("Sheet1").Range("IncD.RebateOnAgriInc").value = 0
+ThisComponent.Sheets.getByName("Sheet1").Range("IncD.SurchargeOnTaxPayable").value = 0
+ThisComponent.Sheets.getByName("Sheet1").Range("IncD.EducationCess").value = ThisComponent.Sheets.getByName("Sheet5").Range("Calc_ED").value
 End Sub
 Private Sub cndBacj_Click()
 

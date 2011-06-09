@@ -56,7 +56,7 @@ End If
 Target.value = UCase(Target.value)
 Target.Formula = UCase(Target.Formula)
 
-If (Val(Sheet2.Range("IncD.RefundDue"))) > 0 Then
+If (Val(ThisComponent.Sheets.getByName("Sheet2").Range("IncD.RefundDue"))) > 0 Then
   If (Range("IncD.EcsRequired").value = "No") Then
       If (Not (Range("IncD.MICRCode").value = "")) Or (Not (Range("IncD.BankAccountType").value = "")) Then
             MsgBox "If refund is by cheque then MICR Code and Type of account must not be filled"
