@@ -208,8 +208,8 @@ Sub setTblinfo_TDSal()
  Dim mIntCtr As Integer
  Dim ccount As Integer
  ccount = 0
- mIntCells = ThisComponent.Sheets.getByName("Sheet3").Range("TDSal.TAN").count
  Set rangecells = ThisComponent.Sheets.getByName("Sheet3").Range("TDSal.TAN").Cells
+ mIntCells = rangecells.ComputeFunction(com.sun.star.sheet.GeneralFunction.COUNT)
  For mIntCtr = 1 To mIntCells
      If Not rangecells.Item(mIntCtr).value = "" Then
          ccount = ccount + 1
@@ -224,8 +224,8 @@ Sub setTblinfo_TDSal2()
  Dim mIntCtr As Integer
  Dim ccount As Integer
  ccount = 0
- mIntCells = ThisComponent.Sheets.getByName("Sheet3").Range("TDSal.TotalTDSSal").count
  Set rangecells = ThisComponent.Sheets.getByName("Sheet3").Range("TDSal.TotalTDSSal").Cells
+ mIntCells = rangecells.ComputeFunction(com.sun.star.sheet.GeneralFunction.COUNT)
  For mIntCtr = 1 To mIntCells
      If Not rangecells.Item(mIntCtr).value = "" Then
          ccount = ccount + 1
@@ -251,8 +251,8 @@ Sub setTblinfo_TDSoth()
  Dim mIntCtr As Integer
  Dim ccount As Integer
  ccount = 0
- mIntCells = ThisComponent.Sheets.getByName("Sheet3").Range("TDSoth.TAN").count
  Set rangecells = ThisComponent.Sheets.getByName("Sheet3").Range("TDSoth.TAN").Cells
+ mIntCells = rangecells.ComputeFunction(com.sun.star.sheet.GeneralFunction.COUNT)
  For mIntCtr = 1 To mIntCells
      If Not rangecells.Item(mIntCtr).value = "" Then
          ccount = ccount + 1
@@ -268,8 +268,8 @@ Sub setTblinfo_TDSoth2()
  Dim mIntCtr As Integer
  Dim ccount As Integer
  ccount = 0
- mIntCells = ThisComponent.Sheets.getByName("Sheet3").Range("TDSoth.ClaimOutOfTotTDSOnAmtPaid").count
  Set rangecells = ThisComponent.Sheets.getByName("Sheet3").Range("TDSoth.ClaimOutOfTotTDSOnAmtPaid").Cells
+ mIntCells = rangecells.ComputeFunction(com.sun.star.sheet.GeneralFunction.COUNT)
  For mIntCtr = 1 To mIntCells
      If Not rangecells.Item(mIntCtr).value = "" Then
          ccount = ccount + 1
@@ -389,8 +389,8 @@ If Not Filename = "" Then
             dupperbound = UBound(dTemp)
             ddTemp = dTemp(UBound(dTemp))
 
-            cnt = SrcBook.Sheets("TDS").Range(RNAME.Name).count
-            dcnt = DestBook.Sheets("TDS").Range(RNAME.Name).count
+            cnt = SrcBook.Sheets("TDS").Range(RNAME.Name).Cells.ComputeFunction(com.sun.star.sheet.GeneralFunction.COUNT)
+            dcnt = DestBook.Sheets("TDS").Range(RNAME.Name).Cells.ComputeFunction(com.sun.star.sheet.GeneralFunction.COUNT)
             DestBook.Sheets("TDS").Activate
                 If (cnt - dcnt) > 0 Then
                     DestBook.Sheets("TDS").Range(dTemp(UBound(dTemp) - 1) & dTemp(UBound(dTemp))).Select
@@ -418,8 +418,8 @@ If Not Filename = "" Then
             dupperbound = UBound(dTemp)
             ddTemp = dTemp(UBound(dTemp))
 
-            cnt = SrcBook.Sheets("TDS").Range(RNAME.Name).count
-            dcnt = DestBook.Sheets("TDS").Range(RNAME.Name).count
+            cnt = SrcBook.Sheets("TDS").Range(RNAME.Name).Cells.ComputeFunction(com.sun.star.sheet.GeneralFunction.COUNT)
+            dcnt = DestBook.Sheets("TDS").Range(RNAME.Name).Cells.ComputeFunction(com.sun.star.sheet.GeneralFunction.COUNT)
             DestBook.Sheets("TDS").Activate
                 If (cnt - dcnt) > 0 Then
                     DestBook.Sheets("TDS").Range(dTemp(UBound(dTemp) - 1) & dTemp(UBound(dTemp))).Select
@@ -446,8 +446,8 @@ If Not Filename = "" Then
             dupperbound = UBound(dTemp)
             ddTemp = dTemp(UBound(dTemp))
 
-            cnt = SrcBook.Sheets("TDS").Range(RNAME.Name).count
-            dcnt = DestBook.Sheets("TDS").Range(RNAME.Name).count
+            cnt = SrcBook.Sheets("TDS").Range(RNAME.Name).Cells.ComputeFunction(com.sun.star.sheet.GeneralFunction.COUNT)
+            dcnt = DestBook.Sheets("TDS").Range(RNAME.Name).Cells.ComputeFunction(com.sun.star.sheet.GeneralFunction.COUNT)
             DestBook.Sheets("TDS").Activate
                 If (cnt - dcnt) > 0 Then
                     DestBook.Sheets("TDS").Range(dTemp(UBound(dTemp) - 1) & dTemp(UBound(dTemp))).Select
@@ -531,8 +531,8 @@ Sub setTblinfo_TaxP()
  Dim mIntCtr As Integer
  Dim ccount As Integer
  ccount = 0
- mIntCells = ThisComponent.Sheets.getByName("Sheet3").Range("TaxP.BSRCode").count
  Set rangecells = ThisComponent.Sheets.getByName("Sheet3").Range("TaxP.BSRCode").Cells
+ mIntCells = rangecells.ComputeFunction(com.sun.star.sheet.GeneralFunction.COUNT)
  For mIntCtr = 1 To mIntCells
      If Not rangecells.Item(mIntCtr).value = "" Then
          ccount = ccount + 1
@@ -548,8 +548,8 @@ Sub setTblinfo_TaxP2()
  Dim mIntCtr As Integer
  Dim ccount As Integer
  ccount = 0
- mIntCells = ThisComponent.Sheets.getByName("Sheet3").Range("TaxP.Amt").count
  Set rangecells = ThisComponent.Sheets.getByName("Sheet3").Range("TaxP.Amt").Cells
+ mIntCells = rangecells.ComputeFunction(com.sun.star.sheet.GeneralFunction.COUNT)
  For mIntCtr = 1 To mIntCells
      If Not rangecells.Item(mIntCtr).value = "" Then
          ccount = ccount + 1
