@@ -379,18 +379,18 @@ If Not Filename = "" Then
     For Each RNAME In Workbooks(newfilename).Names
     
         If RNAME.Name = "TDSal.TAN" Then
-            sfirstbound = SrcBook.Sheets("TDS").Range(RNAME.Name).Address
+            sfirstbound = SrcBook.Sheets("TDS").getCellRangeByName(RNAME.Name).Address
             sTEMP = Split(sfirstbound, "$")
             supperbound = UBound(sTEMP)
             sTEMP = sTEMP(UBound(sTEMP))
 
-            dfirstbound = DestBook.Sheets("TDS").Range(RNAME.Name).Address
+            dfirstbound = DestBook.Sheets("TDS").getCellRangeByName(RNAME.Name).Address
             dTemp = Split(dfirstbound, "$")
             dupperbound = UBound(dTemp)
             ddTemp = dTemp(UBound(dTemp))
 
-            cnt = SrcBook.Sheets("TDS").Range(RNAME.Name).Cells.ComputeFunction(com.sun.star.sheet.GeneralFunction.COUNT)
-            dcnt = DestBook.Sheets("TDS").Range(RNAME.Name).Cells.ComputeFunction(com.sun.star.sheet.GeneralFunction.COUNT)
+            cnt = SrcBook.Sheets("TDS").getCellRangeByName(RNAME.Name).ComputeFunction(com.sun.star.sheet.GeneralFunction.COUNT)
+            dcnt = DestBook.Sheets("TDS").getCellRangeByName(RNAME.Name).ComputeFunction(com.sun.star.sheet.GeneralFunction.COUNT)
             DestBook.Sheets("TDS").Activate
                 If (cnt - dcnt) > 0 Then
                     DestBook.Sheets("TDS").Range(dTemp(UBound(dTemp) - 1) & dTemp(UBound(dTemp))).Select
@@ -418,8 +418,8 @@ If Not Filename = "" Then
             dupperbound = UBound(dTemp)
             ddTemp = dTemp(UBound(dTemp))
 
-            cnt = SrcBook.Sheets("TDS").Range(RNAME.Name).Cells.ComputeFunction(com.sun.star.sheet.GeneralFunction.COUNT)
-            dcnt = DestBook.Sheets("TDS").Range(RNAME.Name).Cells.ComputeFunction(com.sun.star.sheet.GeneralFunction.COUNT)
+            cnt = SrcBook.Sheets("TDS").getCellRangeByName(RNAME.Name).ComputeFunction(com.sun.star.sheet.GeneralFunction.COUNT)
+            dcnt = DestBook.Sheets("TDS").getCellRangeByName(RNAME.Name).ComputeFunction(com.sun.star.sheet.GeneralFunction.COUNT)
             DestBook.Sheets("TDS").Activate
                 If (cnt - dcnt) > 0 Then
                     DestBook.Sheets("TDS").Range(dTemp(UBound(dTemp) - 1) & dTemp(UBound(dTemp))).Select
@@ -446,8 +446,8 @@ If Not Filename = "" Then
             dupperbound = UBound(dTemp)
             ddTemp = dTemp(UBound(dTemp))
 
-            cnt = SrcBook.Sheets("TDS").Range(RNAME.Name).Cells.ComputeFunction(com.sun.star.sheet.GeneralFunction.COUNT)
-            dcnt = DestBook.Sheets("TDS").Range(RNAME.Name).Cells.ComputeFunction(com.sun.star.sheet.GeneralFunction.COUNT)
+            cnt = SrcBook.Sheets("TDS").getCellRangeByName(RNAME.Name).ComputeFunction(com.sun.star.sheet.GeneralFunction.COUNT)
+            dcnt = DestBook.Sheets("TDS").getCellRangeByName(RNAME.Name).ComputeFunction(com.sun.star.sheet.GeneralFunction.COUNT)
             DestBook.Sheets("TDS").Activate
                 If (cnt - dcnt) > 0 Then
                     DestBook.Sheets("TDS").Range(dTemp(UBound(dTemp) - 1) & dTemp(UBound(dTemp))).Select
@@ -564,48 +564,48 @@ Sub setTblinfo_TaxP2()
  Sub Validateshts()
 
 If Not Validatesheet1 Then
-    Sheet1.Activate
+    ThisComponent.CurrentController.setActiveSheet(ThisComponent.Sheets(1-1))
     MsgBox (msgValidateSheet1)
     EndProcessing
 End If
 
  If Not ValidatesheetIncD Then
-     Sheet2.Activate
+     ThisComponent.CurrentController.setActiveSheet(ThisComponent.Sheets(2-1))
      MsgBox (msgValidateSheetIncD)
      EndProcessing
  End If
 
 
  If Not ValidatesheetTDSal Then
-     Sheet3.Activate
+     ThisComponent.CurrentController.setActiveSheet(ThisComponent.Sheets(3-1))
      MsgBox (msgValidateSheetTDSal)
      EndProcessing
  End If
 
 
  If Not ValidatesheetTDSoth Then
-     Sheet3.Activate
+     ThisComponent.CurrentController.setActiveSheet(ThisComponent.Sheets(3-1))
      MsgBox (msgValidateSheetTDSoth)
      EndProcessing
  End If
 
 
  If Not ValidatesheetTaxP Then
-     Sheet3.Activate
+     ThisComponent.CurrentController.setActiveSheet(ThisComponent.Sheets(3-1))
      MsgBox (msgValidateSheetTaxP)
      EndProcessing
  End If
 
 
  If Not ValidatesheetAIR Then
-     Sheet2.Activate
+     ThisComponent.CurrentController.setActiveSheet(ThisComponent.Sheets(2-1))
      MsgBox (msgValidateSheetAIR)
      EndProcessing
  End If
 
 
  If Not ValidatesheetVer Then
-     Sheet2.Activate
+     ThisComponent.CurrentController.setActiveSheet(ThisComponent.Sheets(2-1))
      MsgBox (msgValidateSheetVer)
      EndProcessing
  End If
@@ -617,7 +617,7 @@ End If
 
  Sub printerrormessage_IncD()
  If Not ValidatesheetIncD Then
-     Sheet2.Activate
+     ThisComponent.CurrentController.setActiveSheet(ThisComponent.Sheets(2-1))
      MsgBox (msgValidateSheetIncD)
      EndProcessing
 'Else
@@ -631,7 +631,7 @@ End If
 
  Sub printerrormessage_TDSal()
  If Not ValidatesheetTDSal Then
-     Sheet3.Activate
+     ThisComponent.CurrentController.setActiveSheet(ThisComponent.Sheets(3-1))
      MsgBox (msgValidateSheetTDSal)
      EndProcessing
 'Else
@@ -644,7 +644,7 @@ End If
 
  Sub printerrormessage_TDSoth()
  If Not ValidatesheetTDSoth Then
-     Sheet3.Activate
+     ThisComponent.CurrentController.setActiveSheet(ThisComponent.Sheets(3-1))
      MsgBox (msgValidateSheetTDSoth)
      EndProcessing
 'Else
@@ -655,7 +655,7 @@ End If
 
  Sub printerrormessage_TaxP()
  If Not ValidatesheetTaxP Then
-     Sheet3.Activate
+     ThisComponent.CurrentController.setActiveSheet(ThisComponent.Sheets(3-1))
      MsgBox (msgValidateSheetTaxP)
      EndProcessing
 Else
@@ -666,7 +666,7 @@ MsgBox (" Sheet is ok ")
 
  Sub printerrormessage_AIR()
  If Not ValidatesheetAIR Then
-     Sheet2.Activate
+     ThisComponent.CurrentController.setActiveSheet(ThisComponent.Sheets(2-1))
      MsgBox (msgValidateSheetAIR)
      EndProcessing
 'Else
@@ -677,7 +677,7 @@ MsgBox (" Sheet is ok ")
 
  Sub printerrormessage_Ver()
  If Not ValidatesheetVer Then
-     Sheet2.Activate
+     ThisComponent.CurrentController.setActiveSheet(ThisComponent.Sheets(2-1))
      MsgBox (msgValidateSheetVer)
      EndProcessing
 Else
@@ -729,10 +729,10 @@ Function ValidatesheetIncD() As Boolean
      If Not ValidateBalTaxPayable_IncD() Then ValidatesheetIncD = False
 'End If
 If Not ValidateRefundDue_IncD() Then ValidatesheetIncD = False
-If (Val(ThisComponent.Sheets.getByName("Sheet2").Range("IncD.RefundDue")) > 0) Then
+If (ThisComponent.Sheets(2-1).getCellRangeByName("IncD.RefundDue").Value > 0) Then
      If Not ValidateBankAccountNumber_IncD() Then ValidatesheetIncD = False
      If Not ValidateEcsRequired_IncD() Then ValidatesheetIncD = False
-     If ThisComponent.Sheets.getByName("Sheet2").Range("IncD.EcsRequired") = "Yes" Then
+     If ThisComponent.Sheets(2-1).getCellRangeByName("IncD.EcsRequired") = "Yes" Then
         If Not ValidateMICRCode_IncD() Then ValidatesheetIncD = False
         If Not ValidateBankAccountType_IncD() Then ValidatesheetIncD = False
      End If
@@ -743,7 +743,7 @@ End Function
 Function ValidatesheetTDSal() As Boolean
      ValidatesheetTDSal = True
      If Not ValidateTAN_TDSal() Then ValidatesheetTDSal = False
- If (Len(ThisComponent.Sheets.getByName("Sheet3").Range("TDSal.TAN").Item(1).value) > 0) Then
+ If (Len(ThisComponent.Sheets(1).getCellRangeByName("TDSal.TAN").getCellByPosition(0, 1).String) > 0) Then
      If Not ValidateEmployerOrDeductorOrCollecterName_TDSal() Then ValidatesheetTDSal = False
      If Not ValidateAddrDetail_TDSal() Then ValidatesheetTDSal = False
      If Not ValidateCityOrTownOrDistrict_TDSal() Then ValidatesheetTDSal = False
@@ -769,7 +769,7 @@ End Function
 Function ValidatesheetTDSoth() As Boolean
      ValidatesheetTDSoth = True
      If Not ValidateTAN_TDSoth() Then ValidatesheetTDSoth = False
- If (Len(ThisComponent.Sheets.getByName("Sheet3").Range("TDSoth.TAN").Item(1).value) > 0) Then
+ If (Len(ThisComponent.Sheets(1).getCellRangeByName("TDSoth.TAN").getCellByPosition(0, 1).String) > 0) Then
      If Not ValidateEmployerOrDeductorOrCollecterName_TDSoth() Then ValidatesheetTDSoth = False
      If Not ValidateAddrDetail_TDSoth() Then ValidatesheetTDSoth = False
      If Not ValidateCityOrTownOrDistrict_TDSoth() Then ValidatesheetTDSoth = False
@@ -794,7 +794,7 @@ End Function
 Function ValidatesheetTaxP() As Boolean
      ValidatesheetTaxP = True
      If Not ValidateBSRCode_TaxP() Then ValidatesheetTaxP = False
- If (Len(ThisComponent.Sheets.getByName("Sheet3").Range("TaxP.BSRCode").Item(1).value) > 0) Then
+ If (Len(ThisComponent.Sheets(1).getCellRangeByName("TaxP.BSRCode").getCellByPosition(0, 1).String) > 0) Then
      If Not ValidateNameOfBank_TaxP() Then ValidatesheetTaxP = False
      If Not ValidateNameOfBranch_TaxP() Then ValidatesheetTaxP = False
      'If Not ValidateBSRCode_TaxP() Then ValidatesheetTaxP = False
@@ -834,7 +834,7 @@ Function ValidatesheetVer() As Boolean
      If Not ValidatePlace_Ver() Then ValidatesheetVer = False
      If Not ValidateDate_Ver() Then ValidatesheetVer = False
  'End If
- If (Len(ThisComponent.Sheets.getByName("Sheet2").Range("Ver.IdentificationNoOfTRP")) > 0) Then
+ If (Len(ThisComponent.Sheets(2-1).getCellRangeByName("Ver.IdentificationNoOfTRP").String) > 0) Then
      If Not ValidateIdentificationNoOfTRP_Ver() Then ValidatesheetVer = False
      If Not ValidateNameOfTRP_Ver() Then ValidatesheetVer = False
      If Not ValidateReImbFrmGov_Ver() Then ValidatesheetVer = False
@@ -843,7 +843,7 @@ End Function
 
 Function ValidateIncomeFromSal_IncD() As Boolean
  ValidateIncomeFromSal_IncD = True
- IncomeFromSal_IncD = ThisComponent.Sheets.getByName("Sheet1").Range("IncD.IncomeFromSal").value
+ IncomeFromSal_IncD = ThisComponent.Sheets(1-1).getCellRangeByName("IncD.IncomeFromSal").Value
 End Function
 Function checkhpresponse() As Integer
 
@@ -863,13 +863,13 @@ Function ValidateIncomeFromHP_IncD() As Boolean
 Dim hpresponse As Integer
 
  ValidateIncomeFromHP_IncD = True
- IncomeFromHP_IncD = ThisComponent.Sheets.getByName("Sheet1").Range("IncD.IncomeFromHP").value
+ IncomeFromHP_IncD = ThisComponent.Sheets(1-1).getCellRangeByName("IncD.IncomeFromHP").Value
  
  If IncomeFromHP_IncD < -150000 Then
 hpresponse = checkhpresponse
  If hpresponse = 6 Then
  IncomeFromHP_IncD = -150000
- ThisComponent.Sheets.getByName("Sheet1").Range("IncD.IncomeFromHP").value = IncomeFromHP_IncD
+ ThisComponent.Sheets(1-1).getCellRangeByName("IncD.IncomeFromHP").Value = IncomeFromHP_IncD
  End If
 End If
 
@@ -879,251 +879,251 @@ End Function
 
 Function ValidateFamPension_IncD() As Boolean
  ValidateFamPension_IncD = True
- FamPension_IncD = ThisComponent.Sheets.getByName("Sheet1").Range("IncD.FamPension").value
+ FamPension_IncD = ThisComponent.Sheets(1-1).getCellRangeByName("IncD.FamPension").Value
 End Function
 
 
 Function ValidateIndInterest_IncD() As Boolean
  ValidateIndInterest_IncD = True
- IndInterest_IncD = ThisComponent.Sheets.getByName("Sheet1").Range("IncD.IndInterest").value
+ IndInterest_IncD = ThisComponent.Sheets(1-1).getCellRangeByName("IncD.IndInterest").Value
 End Function
 
 
 Function ValidateIncomeFromOS_IncD() As Boolean
  ValidateIncomeFromOS_IncD = True
- IncomeFromOS_IncD = ThisComponent.Sheets.getByName("Sheet1").Range("IncD.IncomeFromOS").value
+ IncomeFromOS_IncD = ThisComponent.Sheets(1-1).getCellRangeByName("IncD.IncomeFromOS").Value
 End Function
 
 
 Function ValidateGrossTotIncome_IncD() As Boolean
  ValidateGrossTotIncome_IncD = True
- GrossTotIncome_IncD = ThisComponent.Sheets.getByName("Sheet1").Range("IncD.GrossTotIncome").value
+ GrossTotIncome_IncD = ThisComponent.Sheets(1-1).getCellRangeByName("IncD.GrossTotIncome").Value
 End Function
 
 
 Function ValidateSection80C_IncD() As Boolean
  ValidateSection80C_IncD = True
- Section80C_IncD = ThisComponent.Sheets.getByName("Sheet1").Range("IncD.Section80C").value
+ Section80C_IncD = ThisComponent.Sheets(1-1).getCellRangeByName("IncD.Section80C").Value
 End Function
 
 
 Function ValidateSection80CCC_IncD() As Boolean
  ValidateSection80CCC_IncD = True
- Section80CCC_IncD = ThisComponent.Sheets.getByName("Sheet1").Range("IncD.Section80CCC").value
+ Section80CCC_IncD = ThisComponent.Sheets(1-1).getCellRangeByName("IncD.Section80CCC").Value
 End Function
 
 
 Function ValidateSection80CCD_IncD() As Boolean
  ValidateSection80CCD_IncD = True
- Section80CCD_IncD = ThisComponent.Sheets.getByName("Sheet1").Range("IncD.Section80CCD").value
+ Section80CCD_IncD = ThisComponent.Sheets(1-1).getCellRangeByName("IncD.Section80CCD").Value
 End Function
 Function ValidateSection80CCF_IncD() As Boolean
  ValidateSection80CCF_IncD = True
- Section80CCF_IncD = ThisComponent.Sheets.getByName("Sheet1").Range("IncD.Section80CCF").value
+ Section80CCF_IncD = ThisComponent.Sheets(1-1).getCellRangeByName("IncD.Section80CCF").Value
 End Function
 
 
 Function ValidateSection80D_IncD() As Boolean
  ValidateSection80D_IncD = True
- Section80D_IncD = ThisComponent.Sheets.getByName("Sheet1").Range("IncD.Section80D").value
+ Section80D_IncD = ThisComponent.Sheets(1-1).getCellRangeByName("IncD.Section80D").Value
 End Function
 
 
 Function ValidateSection80DD_IncD() As Boolean
  ValidateSection80DD_IncD = True
- Section80DD_IncD = ThisComponent.Sheets.getByName("Sheet1").Range("IncD.Section80DD").value
+ Section80DD_IncD = ThisComponent.Sheets(1-1).getCellRangeByName("IncD.Section80DD").Value
 End Function
 
 
 Function ValidateSection80DDB_IncD() As Boolean
  ValidateSection80DDB_IncD = True
- Section80DDB_IncD = ThisComponent.Sheets.getByName("Sheet1").Range("IncD.Section80DDB").value
+ Section80DDB_IncD = ThisComponent.Sheets(1-1).getCellRangeByName("IncD.Section80DDB").Value
 End Function
 
 
 Function ValidateSection80E_IncD() As Boolean
  ValidateSection80E_IncD = True
- Section80E_IncD = ThisComponent.Sheets.getByName("Sheet1").Range("IncD.Section80E").value
+ Section80E_IncD = ThisComponent.Sheets(1-1).getCellRangeByName("IncD.Section80E").Value
 End Function
 
 
 Function ValidateSection80G_IncD() As Boolean
  ValidateSection80G_IncD = True
- Section80G_IncD = ThisComponent.Sheets.getByName("Sheet1").Range("IncD.Section80G").value
+ Section80G_IncD = ThisComponent.Sheets(1-1).getCellRangeByName("IncD.Section80G").Value
 End Function
 
 
 Function ValidateSection80GG_IncD() As Boolean
  ValidateSection80GG_IncD = True
- Section80GG_IncD = ThisComponent.Sheets.getByName("Sheet1").Range("IncD.Section80GG").value
+ Section80GG_IncD = ThisComponent.Sheets(1-1).getCellRangeByName("IncD.Section80GG").Value
 End Function
 
 
 Function ValidateSection80GGA_IncD() As Boolean
  ValidateSection80GGA_IncD = True
- Section80GGA_IncD = ThisComponent.Sheets.getByName("Sheet1").Range("IncD.Section80GGA").value
+ Section80GGA_IncD = ThisComponent.Sheets(1-1).getCellRangeByName("IncD.Section80GGA").Value
 End Function
 
 
 Function ValidateSection80GGC_IncD() As Boolean
  ValidateSection80GGC_IncD = True
- Section80GGC_IncD = ThisComponent.Sheets.getByName("Sheet1").Range("IncD.Section80GGC").value
+ Section80GGC_IncD = ThisComponent.Sheets(1-1).getCellRangeByName("IncD.Section80GGC").Value
 End Function
 
 
 Function ValidateSection80U_IncD() As Boolean
  ValidateSection80U_IncD = True
- Section80U_IncD = ThisComponent.Sheets.getByName("Sheet1").Range("IncD.Section80U").value
+ Section80U_IncD = ThisComponent.Sheets(1-1).getCellRangeByName("IncD.Section80U").Value
 End Function
 
 
 Function ValidateTotalChapVIADeductions_IncD() As Boolean
  ValidateTotalChapVIADeductions_IncD = True
- TotalChapVIADeductions_IncD = ThisComponent.Sheets.getByName("Sheet1").Range("IncD.TotalChapVIADeductions").value
+ TotalChapVIADeductions_IncD = ThisComponent.Sheets(1-1).getCellRangeByName("IncD.TotalChapVIADeductions").Value
 End Function
 
 
 Function ValidateTotalIncome_IncD() As Boolean
  ValidateTotalIncome_IncD = True
- TotalIncome_IncD = ThisComponent.Sheets.getByName("Sheet1").Range("IncD.TotalIncome").value
+ TotalIncome_IncD = ThisComponent.Sheets(1-1).getCellRangeByName("IncD.TotalIncome").Value
 End Function
 
 
 Function ValidateNetAgriculturalIncome_IncD() As Boolean
  ValidateNetAgriculturalIncome_IncD = True
- NetAgriculturalIncome_IncD = ThisComponent.Sheets.getByName("Sheet1").Range("IncD.NetAgriculturalIncome").value
+ NetAgriculturalIncome_IncD = ThisComponent.Sheets(1-1).getCellRangeByName("IncD.NetAgriculturalIncome").Value
 End Function
 
 
 Function ValidateAggregateIncome_IncD() As Boolean
  ValidateAggregateIncome_IncD = True
- AggregateIncome_IncD = ThisComponent.Sheets.getByName("Sheet1").Range("IncD.AggregateIncome").value
+ AggregateIncome_IncD = ThisComponent.Sheets(1-1).getCellRangeByName("IncD.AggregateIncome").Value
 End Function
 
 
 Function ValidateTaxOnAggregateInc_IncD() As Boolean
  ValidateTaxOnAggregateInc_IncD = True
- TaxOnAggregateInc_IncD = ThisComponent.Sheets.getByName("Sheet1").Range("IncD.TaxOnAggregateInc").value
+ TaxOnAggregateInc_IncD = ThisComponent.Sheets(1-1).getCellRangeByName("IncD.TaxOnAggregateInc").Value
 End Function
 
 
 Function ValidateRebateOnAgriInc_IncD() As Boolean
  ValidateRebateOnAgriInc_IncD = True
- RebateOnAgriInc_IncD = ThisComponent.Sheets.getByName("Sheet1").Range("IncD.RebateOnAgriInc").value
+ RebateOnAgriInc_IncD = ThisComponent.Sheets(1-1).getCellRangeByName("IncD.RebateOnAgriInc").Value
 End Function
 
 
 Function ValidateTotalTaxPayable_IncD() As Boolean
  ValidateTotalTaxPayable_IncD = True
- TotalTaxPayable_IncD = ThisComponent.Sheets.getByName("Sheet1").Range("IncD.TotalTaxPayable").value
+ TotalTaxPayable_IncD = ThisComponent.Sheets(1-1).getCellRangeByName("IncD.TotalTaxPayable").Value
 End Function
 
 
 Function ValidateSurchargeOnTaxPayable_IncD() As Boolean
  ValidateSurchargeOnTaxPayable_IncD = True
- SurchargeOnTaxPayable_IncD = ThisComponent.Sheets.getByName("Sheet1").Range("IncD.SurchargeOnTaxPayable").value
+ SurchargeOnTaxPayable_IncD = ThisComponent.Sheets(1-1).getCellRangeByName("IncD.SurchargeOnTaxPayable").Value
 End Function
 
 
 Function ValidateEducationCess_IncD() As Boolean
  ValidateEducationCess_IncD = True
- EducationCess_IncD = ThisComponent.Sheets.getByName("Sheet1").Range("IncD.EducationCess").value
+ EducationCess_IncD = ThisComponent.Sheets(1-1).getCellRangeByName("IncD.EducationCess").Value
 End Function
 
 
 Function ValidateGrossTaxLiability_IncD() As Boolean
  ValidateGrossTaxLiability_IncD = True
- GrossTaxLiability_IncD = ThisComponent.Sheets.getByName("Sheet1").Range("IncD.GrossTaxLiability").value
+ GrossTaxLiability_IncD = ThisComponent.Sheets(1-1).getCellRangeByName("IncD.GrossTaxLiability").Value
 End Function
 
 
 Function ValidateSection89_IncD() As Boolean
  ValidateSection89_IncD = True
- Section89_IncD = ThisComponent.Sheets.getByName("Sheet1").Range("IncD.Section89").value
+ Section89_IncD = ThisComponent.Sheets(1-1).getCellRangeByName("IncD.Section89").Value
 End Function
 
 
 Function ValidateSection90and91_IncD() As Boolean
  ValidateSection90and91_IncD = True
- Section90and91_IncD = ThisComponent.Sheets.getByName("Sheet1").Range("IncD.Section90and91").value
+ Section90and91_IncD = ThisComponent.Sheets(1-1).getCellRangeByName("IncD.Section90and91").Value
 End Function
 
 
 Function ValidateNetTaxLiability_IncD() As Boolean
  ValidateNetTaxLiability_IncD = True
- NetTaxLiability_IncD = ThisComponent.Sheets.getByName("Sheet1").Range("IncD.NetTaxLiability").value
+ NetTaxLiability_IncD = ThisComponent.Sheets(1-1).getCellRangeByName("IncD.NetTaxLiability").Value
 End Function
 
 
 Function ValidateIntrstPayUs234A_IncD() As Boolean
  ValidateIntrstPayUs234A_IncD = True
- IntrstPayUs234A_IncD = ThisComponent.Sheets.getByName("Sheet1").Range("IncD.IntrstPayUs234A").value
+ IntrstPayUs234A_IncD = ThisComponent.Sheets(1-1).getCellRangeByName("IncD.IntrstPayUs234A").Value
 End Function
 
 
 Function ValidateIntrstPayUs234B_IncD() As Boolean
  ValidateIntrstPayUs234B_IncD = True
- IntrstPayUs234B_IncD = ThisComponent.Sheets.getByName("Sheet1").Range("IncD.IntrstPayUs234B").value
+ IntrstPayUs234B_IncD = ThisComponent.Sheets(1-1).getCellRangeByName("IncD.IntrstPayUs234B").Value
 End Function
 
 
 Function ValidateIntrstPayUs234C_IncD() As Boolean
  ValidateIntrstPayUs234C_IncD = True
- IntrstPayUs234C_IncD = ThisComponent.Sheets.getByName("Sheet1").Range("IncD.IntrstPayUs234C").value
+ IntrstPayUs234C_IncD = ThisComponent.Sheets(1-1).getCellRangeByName("IncD.IntrstPayUs234C").Value
 End Function
 
 
 Function ValidateTotalIntrstPay_IncD() As Boolean
  ValidateTotalIntrstPay_IncD = True
- TotalIntrstPay_IncD = ThisComponent.Sheets.getByName("Sheet1").Range("IncD.TotalIntrstPay").value
+ TotalIntrstPay_IncD = ThisComponent.Sheets(1-1).getCellRangeByName("IncD.TotalIntrstPay").Value
 End Function
 
 
 Function ValidateTotTaxPlusIntrstPay_IncD() As Boolean
  ValidateTotTaxPlusIntrstPay_IncD = True
- TotTaxPlusIntrstPay_IncD = ThisComponent.Sheets.getByName("Sheet1").Range("IncD.TotTaxPlusIntrstPay").value
+ TotTaxPlusIntrstPay_IncD = ThisComponent.Sheets(1-1).getCellRangeByName("IncD.TotTaxPlusIntrstPay").Value
 End Function
 
 
 Function ValidateAdvanceTax_IncD() As Boolean
  ValidateAdvanceTax_IncD = True
- AdvanceTax_IncD = ThisComponent.Sheets.getByName("Sheet2").Range("IncD.AdvanceTax").value
+ AdvanceTax_IncD = ThisComponent.Sheets(2-1).getCellRangeByName("IncD.AdvanceTax").Value
 End Function
 
 
 Function ValidateTDS_IncD() As Boolean
  ValidateTDS_IncD = True
- TDS_IncD = ThisComponent.Sheets.getByName("Sheet2").Range("IncD.TDS").value
+ TDS_IncD = ThisComponent.Sheets(2-1).getCellRangeByName("IncD.TDS").Value
 End Function
 
 
 Function ValidateSelfAssessmentTax_IncD() As Boolean
  ValidateSelfAssessmentTax_IncD = True
- SelfAssessmentTax_IncD = ThisComponent.Sheets.getByName("Sheet2").Range("IncD.SelfAssessmentTax").value
+ SelfAssessmentTax_IncD = ThisComponent.Sheets(2-1).getCellRangeByName("IncD.SelfAssessmentTax").Value
 End Function
 
 
 Function ValidateTotalTaxesPaid_IncD() As Boolean
  ValidateTotalTaxesPaid_IncD = True
- TotalTaxesPaid_IncD = ThisComponent.Sheets.getByName("Sheet2").Range("IncD.TotalTaxesPaid").value
+ TotalTaxesPaid_IncD = ThisComponent.Sheets(2-1).getCellRangeByName("IncD.TotalTaxesPaid").Value
 End Function
 
 
 Function ValidateBalTaxPayable_IncD() As Boolean
  ValidateBalTaxPayable_IncD = True
- BalTaxPayable_IncD = ThisComponent.Sheets.getByName("Sheet2").Range("IncD.BalTaxPayable").value
+ BalTaxPayable_IncD = ThisComponent.Sheets(2-1).getCellRangeByName("IncD.BalTaxPayable").Value
 End Function
 
 
 Function ValidateRefundDue_IncD() As Boolean
  ValidateRefundDue_IncD = True
- RefundDue_IncD = ThisComponent.Sheets.getByName("Sheet2").Range("IncD.RefundDue").value
+ RefundDue_IncD = ThisComponent.Sheets(2-1).getCellRangeByName("IncD.RefundDue").Value
 End Function
 
 Function ValidateBankAccountNumber_IncD() As Boolean
  
  ValidateBankAccountNumber_IncD = True
- BankAccountNumber_IncD = ThisComponent.Sheets.getByName("Sheet2").Range("IncD.BankAccountNumber")
+ BankAccountNumber_IncD = ThisComponent.Sheets(2-1).getCellRangeByName("IncD.BankAccountNumber").String
      If Not chkCompulsory(BankAccountNumber_IncD) Then
          msgbox_IncD ("BankAccountNumber in Sheet Taxes paid and Verification  is Compulsory")
          ValidateBankAccountNumber_IncD = False
@@ -1145,13 +1145,13 @@ End Function
 
 Function ValidateEcsRequired_IncD() As Boolean
   ValidateEcsRequired_IncD = True
- EcsRequired_IncD = ThisComponent.Sheets.getByName("Sheet2").Range("IncD.EcsRequired").value
+ EcsRequired_IncD = ThisComponent.Sheets(2-1).getCellRangeByName("IncD.EcsRequired").Value
  EcsRequired_IncD = Mid(EcsRequired_IncD, 1, 1)
 End Function
 
 Function ValidateMICRCode_IncD() As Boolean
  ValidateMICRCode_IncD = True
- MICRCode_IncD = ThisComponent.Sheets.getByName("Sheet2").Range("IncD.MICRCode").value
+ MICRCode_IncD = ThisComponent.Sheets(2-1).getCellRangeByName("IncD.MICRCode").Value
      If Not chkCompulsory(MICRCode_IncD) Then
          msgbox_IncD ("MICRCode in Sheet Taxes paid and Verification  is Compulsory")
          ValidateMICRCode_IncD = False
@@ -1167,7 +1167,7 @@ End Function
 
 Function ValidateBankAccountType_IncD() As Boolean
   ValidateBankAccountType_IncD = True
- BankAccountType_IncD = ThisComponent.Sheets.getByName("Sheet2").Range("IncD.BankAccountType").value
+ BankAccountType_IncD = ThisComponent.Sheets(2-1).getCellRangeByName("IncD.BankAccountType").Value
  BankAccountType_IncD = Mid(BankAccountType_IncD, 1, 3)
      If Not chkCompulsory(BankAccountType_IncD) Then
          msgbox_IncD ("BankAccountType in Sheet Taxes paid and Verification  is Compulsory")
@@ -1570,13 +1570,13 @@ End Function
 
 Function ValidateTaxExmpIntInc_AIR() As Boolean
  ValidateTaxExmpIntInc_AIR = True
- TaxExmpIntInc_AIR = ThisComponent.Sheets.getByName("Sheet2").Range("AIR.TaxExmpIntInc").value
+ TaxExmpIntInc_AIR = ThisComponent.Sheets(2-1).getCellRangeByName("AIR.TaxExmpIntInc").Value
 End Function
 
 Function ValidateAssesseeVerName_Ver() As Boolean
  
  ValidateAssesseeVerName_Ver = True
- AssesseeVerName_Ver = ThisComponent.Sheets.getByName("Sheet2").Range("Ver.AssesseeVerName")
+ AssesseeVerName_Ver = ThisComponent.Sheets(2-1).getCellRangeByName("Ver.AssesseeVerName").String
      If Not chkCompulsory(AssesseeVerName_Ver) Then
          msgbox_Ver ("AssesseeVerName in Sheet Taxes paid and Verification  is Compulsory")
          ValidateAssesseeVerName_Ver = False
@@ -1592,7 +1592,7 @@ End Function
 Function ValidateFatherName_Ver() As Boolean
  
  ValidateFatherName_Ver = True
- FatherName_Ver = ThisComponent.Sheets.getByName("Sheet2").Range("Ver.FatherName")
+ FatherName_Ver = ThisComponent.Sheets(2-1).getCellRangeByName("Ver.FatherName").String
      If Not chkCompulsory(FatherName_Ver) Then
          msgbox_Ver ("Fathers name in Sheet Taxes paid and Verification  is Compulsory")
          ValidateFatherName_Ver = False
@@ -1610,7 +1610,7 @@ End Function
 Function ValidatePlace_Ver() As Boolean
  
  ValidatePlace_Ver = True
- Place_Ver = ThisComponent.Sheets.getByName("Sheet2").Range("Ver.Place")
+ Place_Ver = ThisComponent.Sheets(2-1).getCellRangeByName("Ver.Place").String
      If Not chkCompulsory(Place_Ver) Then
          msgbox_Ver ("Place in Sheet Taxes paid and Verification  is Compulsory")
          ValidatePlace_Ver = False
@@ -1626,7 +1626,7 @@ End Function
                                                                     
 Function ValidateDate_Ver() As Boolean
  ValidateDate_Ver = True
- Date_Ver = ThisComponent.Sheets.getByName("Sheet2").Range("Ver.Date").value
+ Date_Ver = ThisComponent.Sheets(2-1).getCellRangeByName("Ver.Date").Value
 If Not chkCompulsory(Date_Ver) Then
          msgbox_Ver ("Date in Sheet Taxes paid and Verification  is Compulsory")
     ValidateDate_Ver = False
@@ -1649,7 +1649,7 @@ End Function
 Function ValidateIdentificationNoOfTRP_Ver() As Boolean
  
  ValidateIdentificationNoOfTRP_Ver = True
- IdentificationNoOfTRP_Ver = ThisComponent.Sheets.getByName("Sheet2").Range("Ver.IdentificationNoOfTRP")
+ IdentificationNoOfTRP_Ver = ThisComponent.Sheets(2-1).getCellRangeByName("Ver.IdentificationNoOfTRP").String
      If Not chkCompulsory(IdentificationNoOfTRP_Ver) Then
          msgbox_Ver ("IdentificationNoOfTRP in Sheet Taxes paid and Verification  is Compulsory")
          ValidateIdentificationNoOfTRP_Ver = False
@@ -1664,8 +1664,8 @@ End Function
 Function ValidatePAN_Ver() As Boolean
  
  ValidatePAN_Ver = True
- verPAN = ThisComponent.Sheets.getByName("Sheet2").Range("Ver.PAN")
- PAN_1 = ThisComponent.Sheets.getByName("Sheet1").Range("sheet1.PAN")
+ verPAN = ThisComponent.Sheets(2-1).getCellRangeByName("Ver.PAN").String
+ PAN_1 = ThisComponent.Sheets(1-1).getCellRangeByName("sheet1.PAN").String
  Dim tempPAN_1 As String
  tempPAN_1 = PAN_1
  Dim tempPAN_ver As String
@@ -1700,7 +1700,7 @@ End Function
 Function ValidateNameOfTRP_Ver() As Boolean
  
  ValidateNameOfTRP_Ver = True
- NameOfTRP_Ver = ThisComponent.Sheets.getByName("Sheet2").Range("Ver.NameOfTRP")
+ NameOfTRP_Ver = ThisComponent.Sheets(2-1).getCellRangeByName("Ver.NameOfTRP").String
      If Not chkCompulsory(NameOfTRP_Ver) Then
          msgbox_Ver ("NameOfTRP in Sheet Taxes paid and Verification  is Compulsory")
          ValidateNameOfTRP_Ver = False
@@ -1716,7 +1716,7 @@ End Function
 
 Function ValidateReImbFrmGov_Ver() As Boolean
  ValidateReImbFrmGov_Ver = True
- ReImbFrmGov_Ver = ThisComponent.Sheets.getByName("Sheet2").Range("Ver.ReImbFrmGov").value
+ ReImbFrmGov_Ver = ThisComponent.Sheets(2-1).getCellRangeByName("Ver.ReImbFrmGov").Value
  If Not chkCompulsory(ReImbFrmGov_Ver) Then
          msgbox_Ver ("ReImbFrmGov in Sheet Taxes paid and Verification  is Compulsory")
          ValidateReImbFrmGov_Ver = False
@@ -2085,7 +2085,7 @@ msgint = msgint + "Select Tools -> Macros -> Security and Select Low / Medium . 
 msgint = msgint + "If prompted to enable macros, select Yes and then open the utility."
 
 MsgBox msgint
-Sheet1.Activate
+ThisComponent.CurrentController.setActiveSheet(ThisComponent.Sheets(1-1))
 
 End Sub
 
@@ -2100,14 +2100,14 @@ On Error Resume Next
 intVariables
 Validateshts
 Sheet4.Visible = xlSheetVisible
-Sheet4.Activate
+ThisComponent.CurrentController.setActiveSheet(ThisComponent.Sheets(4-1))
 msginit21 = Module3.getmsgstate
 
 strpassword = msginit21 + "*"
 ThisComponent.CurrentController.getActiveSheet.Unprotect Password:=strpassword
-ThisComponent.Sheets.getByName("Sheet4").Range("tds1").value = UBound(TAN_TDSal)
-ThisComponent.Sheets.getByName("Sheet4").Range("tds2").value = UBound(TAN_TDSoth)
-ThisComponent.Sheets.getByName("Sheet4").Range("tp").value = UBound(BSRCode_TaxP)
+ThisComponent.Sheets(4-1).getCellRangeByName("tds1").Value = UBound(TAN_TDSal)
+ThisComponent.Sheets(4-1).getCellRangeByName("tds2").Value = UBound(TAN_TDSoth)
+ThisComponent.Sheets(4-1).getCellRangeByName("tp").Value = UBound(BSRCode_TaxP)
 
 ThisComponent.CurrentController.getActiveSheet.Protect Password:=strpassword
 MsgBox "To compute Tax and Interest using this utllity, you must click on Compute Tax button and verify the figures before saving the XML. If you have not done so, please do it and then again Generate XML", vbInformation, "Compute Tax"
@@ -2879,7 +2879,7 @@ Total_Count = 0
 
 For i = 2 To 6
 s = i
-If Not Sheet23.Range("A" + s).value = "" Then
+If Not Sheet23.getCellRangeByName("A" + s).String = "" Then
    Total_Count = Total_Count + 1
 End If
 Next
@@ -2888,20 +2888,20 @@ Total_Count = Total_Count + 1
 ReDim sectionname(Total_Count)
 For i = 2 To Total_Count
 s = i
-sectionname(i - 2) = Sheet4.Range("B" + s)
+sectionname(i - 2) = Sheet4.getCellRangeByName("B" + s).String
 Next
 
 
 ReDim secapplicable(Total_Count)
 For i = 2 To Total_Count
 s = i
-secapplicable(i - 2) = Sheet4.Range("D" + s)
+secapplicable(i - 2) = Sheet4.getCellRangeByName("D" + s).String
 Next
 
 ReDim secapplicable1(Total_Count)
 For i = 2 To Total_Count
 s = i
-secapplicable1(i - 2) = Sheet4.Range("E" + s)
+secapplicable1(i - 2) = Sheet4.getCellRangeByName("E" + s).String
 Next
 
 End Sub
@@ -3074,7 +3074,7 @@ End Function
 Function ValidateFirstName_1() As Boolean
  
 ValidateFirstName_1 = True
- FirstName_1 = ThisComponent.Sheets.getByName("Sheet1").Range("sheet1.FirstName")
+ FirstName_1 = ThisComponent.Sheets(1-1).getCellRangeByName("sheet1.FirstName").String
 If Len(FirstName_1) > 25 Then
  msgbox1 ("First Name in Sheet : Income Details  should not exceed 25 characters ")
 ValidateFirstName_1 = False
@@ -3085,7 +3085,7 @@ End Function
 Function ValidateMiddleName_1() As Boolean
  
 ValidateMiddleName_1 = True
- MiddleName_1 = ThisComponent.Sheets.getByName("Sheet1").Range("sheet1.MiddleName")
+ MiddleName_1 = ThisComponent.Sheets(1-1).getCellRangeByName("sheet1.MiddleName").String
 If Len(MiddleName_1) > 25 Then
  msgbox1 ("MiddleName in Sheet : Income Details  should not exceed 25 characters ")
 ValidateMiddleName_1 = False
@@ -3096,7 +3096,7 @@ End Function
 Function ValidateSurNameOrOrgName_1() As Boolean
  
 ValidateSurNameOrOrgName_1 = True
- SurNameOrOrgName_1 = ThisComponent.Sheets.getByName("Sheet1").Range("sheet1.SurNameOrOrgName")
+ SurNameOrOrgName_1 = ThisComponent.Sheets(1-1).getCellRangeByName("sheet1.SurNameOrOrgName").String
 If Len(SurNameOrOrgName_1) > 75 Then
  msgbox1 ("Last Name in Sheet : Income Details  should not exceed 75 characters ")
 ValidateSurNameOrOrgName_1 = False
@@ -3112,7 +3112,7 @@ End Function
  
 Function ValidatePAN_1() As Boolean
 ValidatePAN_1 = True
- PAN_1 = ThisComponent.Sheets.getByName("Sheet1").Range("sheet1.PAN")
+ PAN_1 = ThisComponent.Sheets(1-1).getCellRangeByName("sheet1.PAN").String
 Dim tempPAN As String
 tempPAN = PAN_1
 If Len(PAN_1) > 10 Then
@@ -3143,7 +3143,7 @@ End Function
 Function ValidateResidenceNo_1() As Boolean
  
 ValidateResidenceNo_1 = True
- ResidenceNo_1 = ThisComponent.Sheets.getByName("Sheet1").Range("sheet1.ResidenceNo")
+ ResidenceNo_1 = ThisComponent.Sheets(1-1).getCellRangeByName("sheet1.ResidenceNo").String
 If Len(ResidenceNo_1) > 75 Then
  msgbox1 ("Flat/Door/Block No in Sheet : Income Details  should not exceed 75 characters ")
 ValidateResidenceNo_1 = False
@@ -3164,7 +3164,7 @@ End Function
 Function ValidateRoadOrStreet_1() As Boolean
  
 ValidateRoadOrStreet_1 = True
- RoadOrStreet_1 = ThisComponent.Sheets.getByName("Sheet1").Range("sheet1.RoadOrStreet")
+ RoadOrStreet_1 = ThisComponent.Sheets(1-1).getCellRangeByName("sheet1.RoadOrStreet").String
 If Len(RoadOrStreet_1) > 75 Then
  msgbox1 ("RoadOrStreet in Sheet : Income Details  should not exceed 75 characters ")
 ValidateRoadOrStreet_1 = False
@@ -3175,7 +3175,7 @@ End Function
 Function ValidateLocalityOrArea_1() As Boolean
  
 ValidateLocalityOrArea_1 = True
- LocalityOrArea_1 = ThisComponent.Sheets.getByName("Sheet1").Range("sheet1.LocalityOrArea")
+ LocalityOrArea_1 = ThisComponent.Sheets(1-1).getCellRangeByName("sheet1.LocalityOrArea").String
 If Len(LocalityOrArea_1) > 75 Then
  msgbox1 ("LocalityOrArea in Sheet : Income Details  should not exceed 75 characters ")
 ValidateLocalityOrArea_1 = False
@@ -3191,7 +3191,7 @@ End Function
 Function ValidateCityOrTownOrDistrict_1() As Boolean
  
 ValidateCityOrTownOrDistrict_1 = True
- CityOrTownOrDistrict_1 = ThisComponent.Sheets.getByName("Sheet1").Range("sheet1.CityOrTownOrDistrict")
+ CityOrTownOrDistrict_1 = ThisComponent.Sheets(1-1).getCellRangeByName("sheet1.CityOrTownOrDistrict").String
 If Len(CityOrTownOrDistrict_1) > 75 Then
  msgbox1 ("CityOrTownOrDistrict in Sheet : Income Details  should not exceed 75 characters ")
 ValidateCityOrTownOrDistrict_1 = False
@@ -3207,7 +3207,7 @@ End Function
 
 Function ValidateStateCode_1() As Boolean
 ValidateStateCode_1 = True
- StateCode_1 = ThisComponent.Sheets.getByName("Sheet1").Range("sheet1.StateCode1").value
+ StateCode_1 = ThisComponent.Sheets(1-1).getCellRangeByName("sheet1.StateCode1").Value
  StateCode_1 = Mid(StateCode_1, 1, 2)
 If StateCode_1 = "" Or IsEmpty(StateCode_1) Then
 msgbox1 ("State in Sheet : Income Details  is Compulsory")
@@ -3218,7 +3218,7 @@ End Function
 
 Function ValidatePinCode_1() As Boolean
 ValidatePinCode_1 = True
-PinCode_1 = ThisComponent.Sheets.getByName("Sheet1").Range("sheet1.PinCode").value
+PinCode_1 = ThisComponent.Sheets(1-1).getCellRangeByName("sheet1.PinCode").Value
 If Len(PinCode_1) > 6 Then
  msgbox1 ("PinCode in Sheet : Income Details  should be at 6 digits")
 ValidatePinCode_1 = False
@@ -3241,7 +3241,7 @@ End Function
 
 Function ValidateSTDcode_1() As Boolean
 ValidateSTDcode_1 = True
- STDcode_1 = ThisComponent.Sheets.getByName("Sheet1").Range("sheet1.STDcode").value
+ STDcode_1 = ThisComponent.Sheets(1-1).getCellRangeByName("sheet1.STDcode").Value
 If Len(STDcode_1) > 5 Then
  msgbox1 ("STDcode in Sheet : Income Details  should be at most 5 digits")
 ValidateSTDcode_1 = False
@@ -3268,7 +3268,7 @@ End Function
 Function ValidatePhoneNo_1() As Boolean
 
 ValidatePhoneNo_1 = True
- PhoneNo_1 = ThisComponent.Sheets.getByName("Sheet1").Range("sheet1.PhoneNo").value
+ PhoneNo_1 = ThisComponent.Sheets(1-1).getCellRangeByName("sheet1.PhoneNo").Value
 
 If Len(PhoneNo_1) > 10 Then
  msgbox1 ("PhoneNo in Sheet : Income Details  should be at most 10 digits")
@@ -3306,7 +3306,7 @@ End Function
 Function ValidateMobileNo_1() As Boolean
 
 ValidateMobileNo_1 = True
- MobileNo_1 = ThisComponent.Sheets.getByName("Sheet1").Range("sheet1.MobileNo").value
+ MobileNo_1 = ThisComponent.Sheets(1-1).getCellRangeByName("sheet1.MobileNo").Value
 
 If Trim(MobileNo_1) <> "" Then
 If Len(MobileNo_1) <> 10 Then
@@ -3341,7 +3341,7 @@ End Function
 Function ValidateEmailAddress_1() As Boolean
  
 ValidateEmailAddress_1 = True
- EmailAddress_1 = ThisComponent.Sheets.getByName("Sheet1").Range("sheet1.EmailAddress")
+ EmailAddress_1 = ThisComponent.Sheets(1-1).getCellRangeByName("sheet1.EmailAddress").String
 If Len(EmailAddress_1) > 125 Then
  msgbox1 ("EmailAddress in Sheet : Income Details  should not exceed 125 characters ")
 ValidateEmailAddress_1 = False
@@ -3372,7 +3372,7 @@ End Function
                                                                     
 Function ValidateDOB_1() As Boolean
 ValidateDOB_1 = True
- DOB_1 = ThisComponent.Sheets.getByName("Sheet1").Range("sheet1.DOB").value
+ DOB_1 = ThisComponent.Sheets(1-1).getCellRangeByName("sheet1.DOB").String
 If DOB_1 = " " Or IsEmpty(DOB_1) Then
   msgbox1 ("Date of birth in Sheet : Income Details  is Compulsory")
     ValidateDOB_1 = False
@@ -3383,14 +3383,14 @@ If Not CheckDateddmmyyyy(DOB_1) Then
   msgbox1 ("Date of birth in Sheet : Income Details  must be a valid dd/mm/yyyy format")
  Exit Function
 Else
-  DOB_1 = Dformat(ThisComponent.Sheets.getByName("Sheet1").Range("sheet1.DOB"))
+  DOB_1 = Dformat(ThisComponent.Sheets(1-1).getCellRangeByName("sheet1.DOB").String)
 End If
 If Not ChkMaxInclusiveDate(DOB_1, "2011-03-31") Then
          msgbox1 ("Date of birth in Sheet : Income Details  must not exceed 31/03/2011")
          ValidateDOB_1 = False
          Exit Function
 Else
-  DOB_1 = Dformat(ThisComponent.Sheets.getByName("Sheet1").Range("sheet1.DOB"))
+  DOB_1 = Dformat(ThisComponent.Sheets(1-1).getCellRangeByName("sheet1.DOB").String)
 End If
 
 End Function
@@ -3398,7 +3398,7 @@ End Function
 
 Function ValidateEmployerCategory_1() As Boolean
 ValidateEmployerCategory_1 = True
- EmployerCategory_1 = ThisComponent.Sheets.getByName("Sheet1").Range("sheet1.EmployerCategory1").value
+ EmployerCategory_1 = ThisComponent.Sheets(1-1).getCellRangeByName("sheet1.EmployerCategory1").String
 If EmployerCategory_1 = "" Or IsEmpty(EmployerCategory_1) Then
 msgbox1 ("EmployerCategory in Sheet : Income Details  is Compulsory")
 End If
@@ -3406,7 +3406,7 @@ End Function
 
 Function ValidateGender_1() As Boolean
 ValidateGender_1 = True
- Gender_1 = ThisComponent.Sheets.getByName("Sheet1").Range("sheet1.Gender1").value
+ Gender_1 = ThisComponent.Sheets(1-1).getCellRangeByName("sheet1.Gender1").String
  Gender_1 = Mid(Gender_1, 1, 1)
 If Gender_1 = "" Or IsEmpty(Gender_1) Then
 msgbox1 ("Gender in Sheet : Income Details  is Compulsory")
@@ -3415,7 +3415,7 @@ End Function
 Function ValidateDesigOfficerWardorCircle_1() As Boolean
  
 ValidateDesigOfficerWardorCircle_1 = True
- DesigOfficerWardorCircle_1 = ThisComponent.Sheets.getByName("Sheet1").Range("sheet1.DesigOfficerWardorCircle")
+ DesigOfficerWardorCircle_1 = ThisComponent.Sheets(1-1).getCellRangeByName("sheet1.DesigOfficerWardorCircle").String
 If Len(DesigOfficerWardorCircle_1) > 40 Then
  msgbox1 ("DesigOfficerWardorCircle in Sheet : Income Details  should not exceed 40 characters ")
 ValidateDesigOfficerWardorCircle_1 = False
@@ -3426,7 +3426,7 @@ End Function
 
 Function ValidateReturnFileSec_1() As Boolean
 ValidateReturnFileSec_1 = True
- ReturnFileSec_1 = ThisComponent.Sheets.getByName("Sheet1").Range("sheet1.ReturnFileSec1").value
+ ReturnFileSec_1 = ThisComponent.Sheets(1-1).getCellRangeByName("sheet1.ReturnFileSec1").String
  ReturnFileSec_1 = Mid(ReturnFileSec_1, 1, 2)
  If ReturnFileSec_1 = "" Or IsEmpty(ReturnFileSec_1) Then
 msgbox1 ("ReturnFileSec in Sheet : Income Details  is Compulsory")
@@ -3435,13 +3435,13 @@ End Function
 
 Function ValidateReturnType_1() As Boolean
 ValidateReturnType_1 = True
- ReturnType_1 = ThisComponent.Sheets.getByName("Sheet1").Range("sheet1.ReturnType1").value
+ ReturnType_1 = ThisComponent.Sheets(1-1).getCellRangeByName("sheet1.ReturnType1").String
  ReturnType_1 = Mid(ReturnType_1, 1, 1)
 If ReturnType_1 = " " Or IsEmpty(ReturnType_1) Then
 msgbox1 ("ReturnType in Sheet : Income Details  is Compulsory")
 End If
 
- retfilesec_1 = ThisComponent.Sheets.getByName("Sheet1").Range("sheet1.ReturnFileSec1").value
+ retfilesec_1 = ThisComponent.Sheets(1-1).getCellRangeByName("sheet1.ReturnFileSec1").String
  retfilesec_1 = Mid(ReturnFileSec_1, 1, 2)
  If (retfilesec_1 = "16") Then
     If ReturnType_1 = "O" Then
@@ -3460,7 +3460,7 @@ End Function
 Function ValidateReceiptNo_1() As Boolean
  
 ValidateReceiptNo_1 = True
- ReceiptNo_1 = ThisComponent.Sheets.getByName("Sheet1").Range("sheet1.ReceiptNo")
+ ReceiptNo_1 = ThisComponent.Sheets(1-1).getCellRangeByName("sheet1.ReceiptNo").String
 If Len(ReceiptNo_1) > 15 Then
  msgbox1 ("ReceiptNo in Sheet : Income Details  should be not exceed 15 digits")
 ValidateReceiptNo_1 = False
@@ -3488,13 +3488,13 @@ End Function
                                                                     
 Function ValidateOrigRetFiledDate_1() As Boolean
 ValidateOrigRetFiledDate_1 = True
- OrigRetFiledDate_1 = ThisComponent.Sheets.getByName("Sheet1").Range("sheet1.OrigRetFiledDate").value
+ OrigRetFiledDate_1 = ThisComponent.Sheets(1-1).getCellRangeByName("sheet1.OrigRetFiledDate").String
 If Not CheckDateddmmyyyy(OrigRetFiledDate_1) Then
     ValidateOrigRetFiledDate_1 = False
   msgbox1 ("OrigRetFiledDate in Sheet : Income Details  must be a valid dd/mm/yyyy format")
  Exit Function
 Else
-  OrigRetFiledDate_1 = Dformat(ThisComponent.Sheets.getByName("Sheet1").Range("sheet1.OrigRetFiledDate"))
+  OrigRetFiledDate_1 = Dformat(ThisComponent.Sheets(1-1).getCellRangeByName("sheet1.OrigRetFiledDate").String)
  
   If Len(OrigRetFiledDate_1) > 0 Then
   If Not ChkMinInclusiveDate(OrigRetFiledDate_1, "2011-04-01") Then
@@ -3506,7 +3506,7 @@ Else
           
          'Exit Function
         Else
-  OrigRetFiledDate_1 = Dformat(ThisComponent.Sheets.getByName("Sheet1").Range("sheet1.OrigRetFiledDate"))
+  OrigRetFiledDate_1 = Dformat(ThisComponent.Sheets(1-1).getCellRangeByName("sheet1.OrigRetFiledDate").String)
         End If
   
   End If
@@ -3534,7 +3534,7 @@ End Function
 
 Function ValidateResidentialStatus_1() As Boolean
 ValidateResidentialStatus_1 = True
- ResidentialStatus_1 = ThisComponent.Sheets.getByName("Sheet1").Range("sheet1.ResidentialStatus1").value
+ ResidentialStatus_1 = ThisComponent.Sheets(1-1).getCellRangeByName("sheet1.ResidentialStatus1").String
  ResidentialStatus_1 = Mid(ResidentialStatus_1, 1, 3)
 If ResidentialStatus_1 = " " Or IsEmpty(ResidentialStatus_1) Then
 msgbox1 ("ResidentialStatus in Sheet : Income Details  is Compulsory")
@@ -3542,7 +3542,7 @@ End If
 End Function
 Function ValidateStatus_1() As Boolean
 ValidateStatus_1 = True
- status_1 = ThisComponent.Sheets.getByName("Sheet1").Range("sheet1.Status").value
+ status_1 = ThisComponent.Sheets(1-1).getCellRangeByName("sheet1.Status").String
  status_1 = Mid(status_1, 1, 1)
 If status_1 = "" Or IsEmpty(status_1) Then
 msgbox1 ("Status in Sheet : Income Details  is Compulsory")
@@ -3551,13 +3551,13 @@ End Function
 
 Function ValidateAsseseeRepFlg_1() As Boolean
 ValidateAsseseeRepFlg_1 = True
- AsseseeRepFlg_1 = ThisComponent.Sheets.getByName("Sheet1").Range("sheet1.AsseseeRepFlg").value
+ AsseseeRepFlg_1 = ThisComponent.Sheets(1-1).getCellRangeByName("sheet1.AsseseeRepFlg").String
  AsseseeRepFlg_1 = Mid(AsseseeRepFlg_1, 1, 1)
 End Function
 Function ValidateRepName_1() As Boolean
  
 ValidateRepName_1 = True
- RepName_1 = ThisComponent.Sheets.getByName("Sheet1").Range("sheet1.RepName")
+ RepName_1 = ThisComponent.Sheets(1-1).getCellRangeByName("sheet1.RepName").String
 If Len(RepName_1) > 50 Then
  msgbox1 ("RepName in Sheet : Income Details  should not exceed 50 characters ")
 ValidateRepName_1 = False
@@ -3578,7 +3578,7 @@ End Function
 Function ValidateRepAddress_1() As Boolean
  
 ValidateRepAddress_1 = True
- RepAddress_1 = ThisComponent.Sheets.getByName("Sheet1").Range("sheet1.RepAddress")
+ RepAddress_1 = ThisComponent.Sheets(1-1).getCellRangeByName("sheet1.RepAddress").String
 If Len(RepAddress_1) > 75 Then
  msgbox1 ("RepAddress in Sheet : Income Details  should not exceed 75 characters ")
 ValidateRepAddress_1 = False
@@ -3598,7 +3598,7 @@ End Function
  
 Function ValidateRepPAN_1() As Boolean
 ValidateRepPAN_1 = True
- RepPAN_1 = ThisComponent.Sheets.getByName("Sheet1").Range("sheet1.RepPAN")
+ RepPAN_1 = ThisComponent.Sheets(1-1).getCellRangeByName("sheet1.RepPAN").String
 Dim tempPAN As String
 tempPAN = RepPAN_1
 If Len(RepPAN_1) > 10 Then
@@ -3854,7 +3854,7 @@ Sub printerrormessage_gen1()
 '    msgValidateSheet1 = msgValidateSheet1 & msgValidateShee12Blanks
 '    Else
 '    End If
-    Sheet1.Activate
+    ThisComponent.CurrentController.setActiveSheet(ThisComponent.Sheets(1-1))
     MsgBox (msgValidateSheet1)
     EndProcessing
 Else
@@ -4322,7 +4322,7 @@ Sub filingdate()
 Dim todaysdate As String
 Dim newfilingdate As String
 
-todaysdate = ThisComponent.Sheets.getByName("Sheet5").Range("DateOfProcessing").value
+todaysdate = ThisComponent.Sheets(5-1).getCellRangeByName("DateOfProcessing").String
 
 If Not ValidateDate_Ver() Then
    MsgBox "Please enter Verification Date"
@@ -4334,7 +4334,7 @@ If Not ChkMinInclusiveDate(Date_Ver, todaysdate) Then
 End If
 newfilingdate = Mid(newfilingdate, 9, 2) + "/" + Mid(newfilingdate, 6, 2) + "/" + Mid(newfilingdate, 1, 4)
 
-ThisComponent.Sheets.getByName("Sheet5").Range("dateoffiling").value = newfilingdate
+ThisComponent.Sheets(5-1).getCellRangeByName("dateoffiling").String = newfilingdate
 
 End If
 
