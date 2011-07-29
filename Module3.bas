@@ -203,15 +203,15 @@ End Sub
 
 
 Sub setTblinfo_TDSal()
- Dim rangecells As Range
+ Dim rangecells As Object
  Dim mIntCells As Integer
  Dim mIntCtr As Integer
  Dim ccount As Integer
  ccount = 0
- Set rangecells = ThisComponent.Sheets.getByName("Sheet3").Range("TDSal.TAN").Cells
+ Set rangecells = ThisComponent.Sheets(1).getCellRangeByName("TDSal.TAN_1")
  mIntCells = rangecells.ComputeFunction(com.sun.star.sheet.GeneralFunction.COUNT)
- For mIntCtr = 1 To mIntCells
-     If Not rangecells.Item(mIntCtr).value = "" Then
+ For mIntCtr = 0 To mIntCells - 1
+     If rangecells.getCellByPosition(0, mIntCtr).Type = EMPTY Then
          ccount = ccount + 1
      End If
  Next
@@ -219,15 +219,15 @@ Sub setTblinfo_TDSal()
  rngname_TDSal = "TDSal.TAN;TDSal.EmployerOrDeductorOrCollecterName;TDSal.IncChrgSal;TDSal.TotalTDSSal;"
  End Sub
 Sub setTblinfo_TDSal2()
- Dim rangecells As Range
+ Dim rangecells As Object
  Dim mIntCells As Integer
  Dim mIntCtr As Integer
  Dim ccount As Integer
  ccount = 0
- Set rangecells = ThisComponent.Sheets.getByName("Sheet3").Range("TDSal.TotalTDSSal").Cells
+ Set rangecells = ThisComponent.Sheets(1).getCellRangeByName("TDSal.TotalTDSSal")
  mIntCells = rangecells.ComputeFunction(com.sun.star.sheet.GeneralFunction.COUNT)
- For mIntCtr = 1 To mIntCells
-     If Not rangecells.Item(mIntCtr).value = "" Then
+ For mIntCtr = 0 To mIntCells - 1
+     If rangecells.getCellByPosition(0, mIntCtr).Type = EMPTY Then
          ccount = ccount + 1
      End If
  Next
@@ -246,15 +246,15 @@ End Sub
 
 
 Sub setTblinfo_TDSoth()
- Dim rangecells As Range
+ Dim rangecells As Object
  Dim mIntCells As Integer
  Dim mIntCtr As Integer
  Dim ccount As Integer
  ccount = 0
- Set rangecells = ThisComponent.Sheets.getByName("Sheet3").Range("TDSoth.TAN").Cells
+ Set rangecells = ThisComponent.Sheets(1).getCellRangeByName("TDSoth.TAN")
  mIntCells = rangecells.ComputeFunction(com.sun.star.sheet.GeneralFunction.COUNT)
- For mIntCtr = 1 To mIntCells
-     If Not rangecells.Item(mIntCtr).value = "" Then
+ For mIntCtr = 0 To mIntCells - 1
+     If rangecells.getCellByPosition(0, mIntCtr).Type = EMPTY Then
          ccount = ccount + 1
      End If
  Next
@@ -263,15 +263,15 @@ Sub setTblinfo_TDSoth()
  End Sub
 
 Sub setTblinfo_TDSoth2()
- Dim rangecells As Range
+ Dim rangecells As Object
  Dim mIntCells As Integer
  Dim mIntCtr As Integer
  Dim ccount As Integer
  ccount = 0
- Set rangecells = ThisComponent.Sheets.getByName("Sheet3").Range("TDSoth.ClaimOutOfTotTDSOnAmtPaid").Cells
+ Set rangecells = ThisComponent.Sheets(1).getCellRangeByName("TDSoth.ClaimOutOfTotTDSOnAmtPaid")
  mIntCells = rangecells.ComputeFunction(com.sun.star.sheet.GeneralFunction.COUNT)
- For mIntCtr = 1 To mIntCells
-     If Not rangecells.Item(mIntCtr).value = "" Then
+ For mIntCtr = 0 To mIntCells - 1
+     If rangecells.getCellByPosition(0, mIntCtr).Type = EMPTY Then
          ccount = ccount + 1
      End If
  Next
@@ -526,15 +526,15 @@ End Sub
 
 
 Sub setTblinfo_TaxP()
- Dim rangecells As Range
+ Dim rangecells As Object
  Dim mIntCells As Integer
  Dim mIntCtr As Integer
  Dim ccount As Integer
  ccount = 0
- Set rangecells = ThisComponent.Sheets.getByName("Sheet3").Range("TaxP.BSRCode").Cells
+ Set rangecells = ThisComponent.Sheets(1).getCellRangeByName("TaxP.BSRCode")
  mIntCells = rangecells.ComputeFunction(com.sun.star.sheet.GeneralFunction.COUNT)
- For mIntCtr = 1 To mIntCells
-     If Not rangecells.Item(mIntCtr).value = "" Then
+ For mIntCtr = 0 To mIntCells - 1
+     If rangecells.getCellByPosition(0, mIntCtr).Type = EMPTY Then
          ccount = ccount + 1
      End If
  Next
@@ -543,15 +543,15 @@ Sub setTblinfo_TaxP()
  End Sub
 
 Sub setTblinfo_TaxP2()
- Dim rangecells As Range
+ Dim rangecells As Object
  Dim mIntCells As Integer
  Dim mIntCtr As Integer
  Dim ccount As Integer
  ccount = 0
- Set rangecells = ThisComponent.Sheets.getByName("Sheet3").Range("TaxP.Amt").Cells
+ Set rangecells = ThisComponent.Sheets(1).getCellRangeByName("TaxP.Amt")
  mIntCells = rangecells.ComputeFunction(com.sun.star.sheet.GeneralFunction.COUNT)
- For mIntCtr = 1 To mIntCells
-     If Not rangecells.Item(mIntCtr).value = "" Then
+ For mIntCtr = 0 To mIntCells - 1
+     If rangecells.getCellByPosition(0, mIntCtr).Type = EMPTY Then
          ccount = ccount + 1
      End If
  Next
@@ -1179,11 +1179,11 @@ End Function
 Function ValidateTAN_TDSal() As Boolean
     ValidateTAN_TDSal = True
     setTblinfo_TDSal
-    Dim rangecells As Range
-    Set rangecells = ThisComponent.Sheets.getByName("Sheet3").Range("TDSal.TAN").Cells
+    Dim rangecells As Object
+    Set rangecells = ThisComponent.Sheets(1).getCellRangeByName("TDSal.TAN")
     ReDim TAN_TDSal(end_TDSal)
-    For i = 1 To end_TDSal
-        TAN_TDSal(i) = rangecells.Item(i).value
+    For i = 0  To end_TDSal - 1
+        TAN_TDSal(i) = rangecells.getCellByPosition(0, i).String
  If Not Len(TAN_TDSal(i)) = 0 Then
      If Not ValidateTantype_text(Mid(TAN_TDSal(i), 1, 4)) Then
          msgbox_TDSal ("TAN at Sr. No  " & i & " in Sheet TDS  is invalid. First 4 alphabets, next 5 digits, then alphabet")
@@ -1212,11 +1212,11 @@ Function ValidateEmployerOrDeductorOrCollecterName_TDSal() As Boolean
  
     ValidateEmployerOrDeductorOrCollecterName_TDSal = True
     setTblinfo_TDSal
-    Dim rangecells As Range
-    Set rangecells = ThisComponent.Sheets.getByName("Sheet3").Range("TDSal.EmployerOrDeductorOrCollecterName").Cells
+    Dim rangecells As Object
+    Set rangecells = ThisComponent.Sheets(1).getCellRangeByName("TDSal.EmployerOrDeductorOrCollecterName")
     ReDim EmployerOrDeductorOrCollecterName_TDSal(end_TDSal)
-    For i = 1 To end_TDSal
-        EmployerOrDeductorOrCollecterName_TDSal(i) = rangecells.Item(i).value
+    For i = 0  To end_TDSal - 1
+        EmployerOrDeductorOrCollecterName_TDSal(i) = rangecells.getCellByPosition(0, i).String
      If Not chkCompulsory(EmployerOrDeductorOrCollecterName_TDSal(i)) Then
          msgbox_TDSal ("EmployerOrDeductorOrCollecterName at Sr. No  " & i & "  in Sheet TDS  is Compulsory")
          ValidateEmployerOrDeductorOrCollecterName_TDSal = False
@@ -1255,11 +1255,11 @@ End Function
 Function ValidateIncChrgSal_TDSal() As Boolean
     ValidateIncChrgSal_TDSal = True
     setTblinfo_TDSal
-    Dim rangecells As Range
-    Set rangecells = ThisComponent.Sheets.getByName("Sheet3").Range("TDSal.IncChrgSal").Cells
+    Dim rangecells As Object
+    Set rangecells = ThisComponent.Sheets(1).getCellRangeByName("TDSal.IncChrgSal")
     ReDim IncChrgSal_TDSal(end_TDSal)
-    For i = 1 To end_TDSal
-        IncChrgSal_TDSal(i) = rangecells.Item(i).value
+    For i = 0  To end_TDSal - 1
+        IncChrgSal_TDSal(i) = rangecells.getCellByPosition(0, i).String
  Next
 End Function
 
@@ -1276,11 +1276,11 @@ End Function
 Function ValidateTotalTDSSal_TDSal() As Boolean
     ValidateTotalTDSSal_TDSal = True
     setTblinfo_TDSal
-    Dim rangecells As Range
-    Set rangecells = ThisComponent.Sheets.getByName("Sheet3").Range("TDSal.TotalTDSSal").Cells
+    Dim rangecells As Object
+    Set rangecells = ThisComponent.Sheets(1).getCellRangeByName("TDSal.TotalTDSSal")
     ReDim TotalTDSSal_TDSal(end_TDSal)
-    For i = 1 To end_TDSal
-        TotalTDSSal_TDSal(i) = rangecells.Item(i).value
+    For i = 0  To end_TDSal - 1
+        TotalTDSSal_TDSal(i) = rangecells.getCellByPosition(0, i).String
  Next
 End Function
 
@@ -1293,11 +1293,11 @@ End Function
 Function ValidateTAN_TDSoth() As Boolean
     ValidateTAN_TDSoth = True
     setTblinfo_TDSoth
-    Dim rangecells As Range
-    Set rangecells = ThisComponent.Sheets.getByName("Sheet3").Range("TDSoth.TAN").Cells
+    Dim rangecells As Object
+    Set rangecells = ThisComponent.Sheets(1).getCellRangeByName("TDSoth.TAN")
     ReDim TAN_TDSoth(end_TDSoth)
-    For i = 1 To end_TDSoth
-        TAN_TDSoth(i) = rangecells.Item(i).value
+    For i = 0  To end_TDSoth - 1
+        TAN_TDSoth(i) = rangecells.getCellByPosition(0, i).String
  If Not Len(TAN_TDSoth(i)) = 0 Then
      If Not ValidateTantype_text(Mid(TAN_TDSoth(i), 1, 4)) Then
          msgbox_TDSoth ("TAN at Sr. No  " & i & " in Sheet TDS  is invalid. First 4 alphabets, next 5 digits, then alphabet")
@@ -1326,11 +1326,11 @@ Function ValidateEmployerOrDeductorOrCollecterName_TDSoth() As Boolean
  
     ValidateEmployerOrDeductorOrCollecterName_TDSoth = True
     setTblinfo_TDSoth
-    Dim rangecells As Range
-    Set rangecells = ThisComponent.Sheets.getByName("Sheet3").Range("TDSoth.EmployerOrDeductorOrCollecterName").Cells
+    Dim rangecells As Object
+    Set rangecells = ThisComponent.Sheets(1).getCellRangeByName("TDSoth.EmployerOrDeductorOrCollecterName")
     ReDim EmployerOrDeductorOrCollecterName_TDSoth(end_TDSoth)
-    For i = 1 To end_TDSoth
-        EmployerOrDeductorOrCollecterName_TDSoth(i) = rangecells.Item(i).value
+    For i = 0  To end_TDSoth - 1
+        EmployerOrDeductorOrCollecterName_TDSoth(i) = rangecells.getCellByPosition(0, i).String
      If Not chkCompulsory(EmployerOrDeductorOrCollecterName_TDSoth(i)) Then
          msgbox_TDSoth ("EmployerOrDeductorOrCollecterName at Sr. No  " & i & "  in Sheet TDS  is Compulsory")
          ValidateEmployerOrDeductorOrCollecterName_TDSoth = False
@@ -1377,11 +1377,11 @@ End Function
 Function ValidateTotTDSOnAmtPaid_TDSoth() As Boolean
     ValidateTotTDSOnAmtPaid_TDSoth = True
     setTblinfo_TDSoth
-    Dim rangecells As Range
-    Set rangecells = ThisComponent.Sheets.getByName("Sheet3").Range("TDSoth.TotTDSOnAmtPaid").Cells
+    Dim rangecells As Object
+    Set rangecells = ThisComponent.Sheets(1).getCellRangeByName("TDSoth.TotTDSOnAmtPaid")
     ReDim TotTDSOnAmtPaid_TDSoth(end_TDSoth)
-    For i = 1 To end_TDSoth
-        TotTDSOnAmtPaid_TDSoth(i) = rangecells.Item(i).value
+    For i = 0  To end_TDSoth - 1
+        TotTDSOnAmtPaid_TDSoth(i) = rangecells.getCellByPosition(0, i).String
  Next
 End Function
 
@@ -1389,14 +1389,14 @@ End Function
 Function ValidateClaimOutOfTotTDSOnAmtPaid_TDSoth() As Boolean
     ValidateClaimOutOfTotTDSOnAmtPaid_TDSoth = True
     setTblinfo_TDSoth
-    Dim rangecells As Range
-    Set rangecells = ThisComponent.Sheets.getByName("Sheet3").Range("TDSoth.ClaimOutOfTotTDSOnAmtPaid").Cells
+    Dim rangecells As Object
+    Set rangecells = ThisComponent.Sheets(1).getCellRangeByName("TDSoth.ClaimOutOfTotTDSOnAmtPaid")
     ReDim ClaimOutOfTotTDSOnAmtPaid_TDSoth(end_TDSoth)
     Dim msgtdsothwarning As Boolean
     Dim msgtdsothwarningmessage As String
     msgtdsothwarningmessage = "Typically amount in Col 7 of TDS Other than Salary would be the same as amount in Col 6. However, in some rows the amount in Col 7 has been left blank or is less than the amount in Col 6. Please verify and change if required."
-    For i = 1 To end_TDSoth
-        ClaimOutOfTotTDSOnAmtPaid_TDSoth(i) = rangecells.Item(i).value
+    For i = 0  To end_TDSoth - 1
+        ClaimOutOfTotTDSOnAmtPaid_TDSoth(i) = rangecells.getCellByPosition(0, i).String
         
         If (TotTDSOnAmtPaid_TDSoth(i) = "") Then
         TotTDSOnAmtPaid_TDSoth(i) = 0
@@ -1434,11 +1434,11 @@ End Function
 Function ValidateBSRCode_TaxP() As Boolean
     ValidateBSRCode_TaxP = True
     setTblinfo_TaxP
-    Dim rangecells As Range
-    Set rangecells = ThisComponent.Sheets.getByName("Sheet3").Range("TaxP.BSRCode").Cells
+    Dim rangecells As Object
+    Set rangecells = ThisComponent.Sheets(1).getCellRangeByName("TaxP.BSRCode")
     ReDim BSRCode_TaxP(end_TaxP)
-    For i = 1 To end_TaxP
-        BSRCode_TaxP(i) = rangecells.Item(i).value
+    For i = 0  To end_TaxP - 1
+        BSRCode_TaxP(i) = rangecells.getCellByPosition(0, i).String
      If Not chkCompulsory(BSRCode_TaxP(i)) Then
          msgbox_TaxP ("BSRCode at Sr. No  " & i & "  in Sheet TDS  is Compulsory")
          ValidateBSRCode_TaxP = False
@@ -1456,11 +1456,11 @@ End Function
 Function ValidateDateDep_TaxP() As Boolean
     ValidateDateDep_TaxP = True
     setTblinfo_TaxP
-    Dim rangecells As Range
-    Set rangecells = ThisComponent.Sheets.getByName("Sheet3").Range("TaxP.DateDep").Cells
+    Dim rangecells As Object
+    Set rangecells = ThisComponent.Sheets(1).getCellRangeByName("TaxP.DateDep")
     ReDim DateDep_TaxP(end_TaxP)
-    For i = 1 To end_TaxP
-        DateDep_TaxP(i) = rangecells.Item(i).value
+    For i = 0  To end_TaxP - 1
+        DateDep_TaxP(i) = rangecells.getCellByPosition(0, i).String
 If Not chkCompulsory(DateDep_TaxP(i)) Then
          msgbox_TaxP ("DateDep at Sr. No  " & i & "  in Sheet TDS  is Compulsory")
     ValidateDateDep_TaxP = False
@@ -1489,11 +1489,11 @@ End Function
 Function ValidateSrlNoOfChaln_TaxP() As Boolean
     ValidateSrlNoOfChaln_TaxP = True
     setTblinfo_TaxP
-    Dim rangecells As Range
-    Set rangecells = ThisComponent.Sheets.getByName("Sheet3").Range("TaxP.SrlNoOfChaln").Cells
+    Dim rangecells As Object
+    Set rangecells = ThisComponent.Sheets(1).getCellRangeByName("TaxP.SrlNoOfChaln")
     ReDim SrlNoOfChaln_TaxP(end_TaxP)
-    For i = 1 To end_TaxP
-        SrlNoOfChaln_TaxP(i) = rangecells.Item(i).value
+    For i = 0  To end_TaxP - 1
+        SrlNoOfChaln_TaxP(i) = rangecells.getCellByPosition(0, i).String
      If Not chkCompulsory(SrlNoOfChaln_TaxP(i)) Then
          msgbox_TaxP ("SrlNoOfChaln at Sr. No  " & i & "  in Sheet TDS  is Compulsory")
          ValidateSrlNoOfChaln_TaxP = False
@@ -1511,11 +1511,11 @@ End Function
 Function ValidateAmt_TaxP() As Boolean
     ValidateAmt_TaxP = True
     setTblinfo_TaxP
-    Dim rangecells As Range
-    Set rangecells = ThisComponent.Sheets.getByName("Sheet3").Range("TaxP.Amt").Cells
+    Dim rangecells As Object
+    Set rangecells = ThisComponent.Sheets(1).getCellRangeByName("TaxP.Amt")
     ReDim Amt_TaxP(end_TaxP)
-    For i = 1 To end_TaxP
-        Amt_TaxP(i) = rangecells.Item(i).value
+    For i = 0  To end_TaxP - 1
+        Amt_TaxP(i) = rangecells.getCellByPosition(0, i).String
  Next
 End Function
 
