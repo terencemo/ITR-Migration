@@ -3854,6 +3854,7 @@ msgValidateSheet1 = msgValidateSheet1 & strmsg & Chr(13)
 End Function
 
 Sub printerrormessage_gen1()
+ msgValidateSheet1 = ""
  If Not Validatesheet1 Then
 '    If Not Validatesheet1Blanks Then
 '    msgValidateSheet1 = msgValidateSheet1 & msgValidateShee12Blanks
