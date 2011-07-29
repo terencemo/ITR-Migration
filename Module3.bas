@@ -2144,7 +2144,14 @@ Validateshts
 ' End If
 '
     PANCODE = PAN_1
-    XMLFileName = ThisWorkbook.Path & "\ITR1_" & ThisComponent.Sheets.getByName("Sheet1").Range("sheet1.PAN").value & ".xml"
+    Dim sep As String
+    If "/" = Left(ThisWorkbook.Path, 1) Then
+       sep = "/"
+    Else
+       sep = "\"
+    End If
+    
+    XMLFileName = ThisWorkbook.Path & sep & "ITR1_" & Sheet1.Range("sheet1.PAN").value & ".xml"
     
     Open XMLFileName For Output As #1
             XMLHeader
