@@ -2065,8 +2065,6 @@ Sub Auto_Open()
 
     With Application
         .Calculation = xlAutomatic
-        .MaxChange = 0.001
-        .CellDragAndDrop = False
         
 
     End With
