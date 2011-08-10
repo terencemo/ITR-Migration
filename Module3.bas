@@ -2983,7 +2983,7 @@ Sub HideSheets()
 Application.ScreenUpdating = False
 
 For Each ws In ActiveWorkbook.Worksheets
-    ws.Visible = xlSheetVisible
+    ws.isVisible = True
 Next
 
 Call createarr
