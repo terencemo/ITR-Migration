@@ -570,42 +570,42 @@ If Not Validatesheet1 Then
 End If
 
  If Not ValidatesheetIncD Then
-     ThisComponent.CurrentController.setActiveSheet(ThisComponent.Sheets(2-1))
+     ThisComponent.CurrentController.setActiveSheet(ThisComponent.Sheets(2))
      MsgBox (msgValidateSheetIncD)
      EndProcessing
  End If
 
 
  If Not ValidatesheetTDSal Then
-     ThisComponent.CurrentController.setActiveSheet(ThisComponent.Sheets(3-1))
+     ThisComponent.CurrentController.setActiveSheet(ThisComponent.Sheets(1))
      MsgBox (msgValidateSheetTDSal)
      EndProcessing
  End If
 
 
  If Not ValidatesheetTDSoth Then
-     ThisComponent.CurrentController.setActiveSheet(ThisComponent.Sheets(3-1))
+     ThisComponent.CurrentController.setActiveSheet(ThisComponent.Sheets(1))
      MsgBox (msgValidateSheetTDSoth)
      EndProcessing
  End If
 
 
  If Not ValidatesheetTaxP Then
-     ThisComponent.CurrentController.setActiveSheet(ThisComponent.Sheets(3-1))
+     ThisComponent.CurrentController.setActiveSheet(ThisComponent.Sheets(1))
      MsgBox (msgValidateSheetTaxP)
      EndProcessing
  End If
 
 
  If Not ValidatesheetAIR Then
-     ThisComponent.CurrentController.setActiveSheet(ThisComponent.Sheets(2-1))
+     ThisComponent.CurrentController.setActiveSheet(ThisComponent.Sheets(2))
      MsgBox (msgValidateSheetAIR)
      EndProcessing
  End If
 
 
  If Not ValidatesheetVer Then
-     ThisComponent.CurrentController.setActiveSheet(ThisComponent.Sheets(2-1))
+     ThisComponent.CurrentController.setActiveSheet(ThisComponent.Sheets(2))
      MsgBox (msgValidateSheetVer)
      EndProcessing
  End If
@@ -617,7 +617,7 @@ End If
 
  Sub printerrormessage_IncD()
  If Not ValidatesheetIncD Then
-     ThisComponent.CurrentController.setActiveSheet(ThisComponent.Sheets(2-1))
+     ThisComponent.CurrentController.setActiveSheet(ThisComponent.Sheets(2))
      MsgBox (msgValidateSheetIncD)
      EndProcessing
 'Else
@@ -666,7 +666,7 @@ MsgBox (" Sheet is ok ")
 
  Sub printerrormessage_AIR()
  If Not ValidatesheetAIR Then
-     ThisComponent.CurrentController.setActiveSheet(ThisComponent.Sheets(2-1))
+     ThisComponent.CurrentController.setActiveSheet(ThisComponent.Sheets(2))
      MsgBox (msgValidateSheetAIR)
      EndProcessing
 'Else
@@ -677,7 +677,7 @@ MsgBox (" Sheet is ok ")
 
  Sub printerrormessage_Ver()
  If Not ValidatesheetVer Then
-     ThisComponent.CurrentController.setActiveSheet(ThisComponent.Sheets(2-1))
+     ThisComponent.CurrentController.setActiveSheet(ThisComponent.Sheets(2))
      MsgBox (msgValidateSheetVer)
      EndProcessing
 Else
@@ -729,10 +729,10 @@ Function ValidatesheetIncD() As Boolean
      If Not ValidateBalTaxPayable_IncD() Then ValidatesheetIncD = False
 'End If
 If Not ValidateRefundDue_IncD() Then ValidatesheetIncD = False
-If (ThisComponent.Sheets(2-1).getCellRangeByName("IncD.RefundDue").Value > 0) Then
+If (ThisComponent.Sheets(2).getCellRangeByName("IncD.RefundDue").Value > 0) Then
      If Not ValidateBankAccountNumber_IncD() Then ValidatesheetIncD = False
      If Not ValidateEcsRequired_IncD() Then ValidatesheetIncD = False
-     If ThisComponent.Sheets(2-1).getCellRangeByName("IncD.EcsRequired") = "Yes" Then
+     If ThisComponent.Sheets(2).getCellRangeByName("IncD.EcsRequired").String = "Yes" Then
         If Not ValidateMICRCode_IncD() Then ValidatesheetIncD = False
         If Not ValidateBankAccountType_IncD() Then ValidatesheetIncD = False
      End If
@@ -834,7 +834,7 @@ Function ValidatesheetVer() As Boolean
      If Not ValidatePlace_Ver() Then ValidatesheetVer = False
      If Not ValidateDate_Ver() Then ValidatesheetVer = False
  'End If
- If (Len(ThisComponent.Sheets(2-1).getCellRangeByName("Ver.IdentificationNoOfTRP").String) > 0) Then
+ If (Len(ThisComponent.Sheets(2).getCellRangeByName("Ver.IdentificationNoOfTRP").String) > 0) Then
      If Not ValidateIdentificationNoOfTRP_Ver() Then ValidatesheetVer = False
      If Not ValidateNameOfTRP_Ver() Then ValidatesheetVer = False
      If Not ValidateReImbFrmGov_Ver() Then ValidatesheetVer = False
@@ -1087,43 +1087,43 @@ End Function
 
 Function ValidateAdvanceTax_IncD() As Boolean
  ValidateAdvanceTax_IncD = True
- AdvanceTax_IncD = ThisComponent.Sheets(2-1).getCellRangeByName("IncD.AdvanceTax").Value
+ AdvanceTax_IncD = ThisComponent.Sheets(2).getCellRangeByName("IncD.AdvanceTax").Value
 End Function
 
 
 Function ValidateTDS_IncD() As Boolean
  ValidateTDS_IncD = True
- TDS_IncD = ThisComponent.Sheets(2-1).getCellRangeByName("IncD.TDS").Value
+ TDS_IncD = ThisComponent.Sheets(2).getCellRangeByName("IncD.TDS").Value
 End Function
 
 
 Function ValidateSelfAssessmentTax_IncD() As Boolean
  ValidateSelfAssessmentTax_IncD = True
- SelfAssessmentTax_IncD = ThisComponent.Sheets(2-1).getCellRangeByName("IncD.SelfAssessmentTax").Value
+ SelfAssessmentTax_IncD = ThisComponent.Sheets(2).getCellRangeByName("IncD.SelfAssessmentTax").Value
 End Function
 
 
 Function ValidateTotalTaxesPaid_IncD() As Boolean
  ValidateTotalTaxesPaid_IncD = True
- TotalTaxesPaid_IncD = ThisComponent.Sheets(2-1).getCellRangeByName("IncD.TotalTaxesPaid").Value
+ TotalTaxesPaid_IncD = ThisComponent.Sheets(2).getCellRangeByName("IncD.TotalTaxesPaid").Value
 End Function
 
 
 Function ValidateBalTaxPayable_IncD() As Boolean
  ValidateBalTaxPayable_IncD = True
- BalTaxPayable_IncD = ThisComponent.Sheets(2-1).getCellRangeByName("IncD.BalTaxPayable").Value
+ BalTaxPayable_IncD = ThisComponent.Sheets(2).getCellRangeByName("IncD.BalTaxPayable").Value
 End Function
 
 
 Function ValidateRefundDue_IncD() As Boolean
  ValidateRefundDue_IncD = True
- RefundDue_IncD = ThisComponent.Sheets(2-1).getCellRangeByName("IncD.RefundDue").Value
+ RefundDue_IncD = ThisComponent.Sheets(2).getCellRangeByName("IncD.RefundDue").Value
 End Function
 
 Function ValidateBankAccountNumber_IncD() As Boolean
  
  ValidateBankAccountNumber_IncD = True
- BankAccountNumber_IncD = ThisComponent.Sheets(2-1).getCellRangeByName("IncD.BankAccountNumber").String
+ BankAccountNumber_IncD = ThisComponent.Sheets(2).getCellRangeByName("IncD.BankAccountNumber").Value
      If Not chkCompulsory(BankAccountNumber_IncD) Then
          msgbox_IncD ("BankAccountNumber in Sheet Taxes paid and Verification  is Compulsory")
          ValidateBankAccountNumber_IncD = False
@@ -1145,13 +1145,13 @@ End Function
 
 Function ValidateEcsRequired_IncD() As Boolean
   ValidateEcsRequired_IncD = True
- EcsRequired_IncD = ThisComponent.Sheets(2-1).getCellRangeByName("IncD.EcsRequired").Value
+ EcsRequired_IncD = ThisComponent.Sheets(2).getCellRangeByName("IncD.EcsRequired").String
  EcsRequired_IncD = Mid(EcsRequired_IncD, 1, 1)
 End Function
 
 Function ValidateMICRCode_IncD() As Boolean
  ValidateMICRCode_IncD = True
- MICRCode_IncD = ThisComponent.Sheets(2-1).getCellRangeByName("IncD.MICRCode").Value
+ MICRCode_IncD = ThisComponent.Sheets(2).getCellRangeByName("IncD.MICRCode").String
      If Not chkCompulsory(MICRCode_IncD) Then
          msgbox_IncD ("MICRCode in Sheet Taxes paid and Verification  is Compulsory")
          ValidateMICRCode_IncD = False
@@ -1167,7 +1167,7 @@ End Function
 
 Function ValidateBankAccountType_IncD() As Boolean
   ValidateBankAccountType_IncD = True
- BankAccountType_IncD = ThisComponent.Sheets(2-1).getCellRangeByName("IncD.BankAccountType").Value
+ BankAccountType_IncD = ThisComponent.Sheets(2).getCellRangeByName("IncD.BankAccountType").String
  BankAccountType_IncD = Mid(BankAccountType_IncD, 1, 3)
      If Not chkCompulsory(BankAccountType_IncD) Then
          msgbox_IncD ("BankAccountType in Sheet Taxes paid and Verification  is Compulsory")
@@ -1570,13 +1570,13 @@ End Function
 
 Function ValidateTaxExmpIntInc_AIR() As Boolean
  ValidateTaxExmpIntInc_AIR = True
- TaxExmpIntInc_AIR = ThisComponent.Sheets(2-1).getCellRangeByName("AIR.TaxExmpIntInc").Value
+ TaxExmpIntInc_AIR = ThisComponent.Sheets(2).getCellRangeByName("AIR.TaxExmpIntInc").Value
 End Function
 
 Function ValidateAssesseeVerName_Ver() As Boolean
  
  ValidateAssesseeVerName_Ver = True
- AssesseeVerName_Ver = ThisComponent.Sheets(2-1).getCellRangeByName("Ver.AssesseeVerName").String
+ AssesseeVerName_Ver = ThisComponent.Sheets(2).getCellRangeByName("Ver.AssesseeVerName").String
      If Not chkCompulsory(AssesseeVerName_Ver) Then
          msgbox_Ver ("AssesseeVerName in Sheet Taxes paid and Verification  is Compulsory")
          ValidateAssesseeVerName_Ver = False
@@ -1592,7 +1592,7 @@ End Function
 Function ValidateFatherName_Ver() As Boolean
  
  ValidateFatherName_Ver = True
- FatherName_Ver = ThisComponent.Sheets(2-1).getCellRangeByName("Ver.FatherName").String
+ FatherName_Ver = ThisComponent.Sheets(2).getCellRangeByName("Ver.FatherName").String
      If Not chkCompulsory(FatherName_Ver) Then
          msgbox_Ver ("Fathers name in Sheet Taxes paid and Verification  is Compulsory")
          ValidateFatherName_Ver = False
@@ -1610,7 +1610,7 @@ End Function
 Function ValidatePlace_Ver() As Boolean
  
  ValidatePlace_Ver = True
- Place_Ver = ThisComponent.Sheets(2-1).getCellRangeByName("Ver.Place").String
+ Place_Ver = ThisComponent.Sheets(2).getCellRangeByName("Ver.Place").String
      If Not chkCompulsory(Place_Ver) Then
          msgbox_Ver ("Place in Sheet Taxes paid and Verification  is Compulsory")
          ValidatePlace_Ver = False
@@ -1626,7 +1626,7 @@ End Function
                                                                     
 Function ValidateDate_Ver() As Boolean
  ValidateDate_Ver = True
- Date_Ver = ThisComponent.Sheets(2-1).getCellRangeByName("Ver.Date").Value
+ Date_Ver = ThisComponent.Sheets(2).getCellRangeByName("Ver.Date").Value
 If Not chkCompulsory(Date_Ver) Then
          msgbox_Ver ("Date in Sheet Taxes paid and Verification  is Compulsory")
     ValidateDate_Ver = False
@@ -1649,7 +1649,7 @@ End Function
 Function ValidateIdentificationNoOfTRP_Ver() As Boolean
  
  ValidateIdentificationNoOfTRP_Ver = True
- IdentificationNoOfTRP_Ver = ThisComponent.Sheets(2-1).getCellRangeByName("Ver.IdentificationNoOfTRP").String
+ IdentificationNoOfTRP_Ver = ThisComponent.Sheets(2).getCellRangeByName("Ver.IdentificationNoOfTRP").String
      If Not chkCompulsory(IdentificationNoOfTRP_Ver) Then
          msgbox_Ver ("IdentificationNoOfTRP in Sheet Taxes paid and Verification  is Compulsory")
          ValidateIdentificationNoOfTRP_Ver = False
@@ -1664,7 +1664,7 @@ End Function
 Function ValidatePAN_Ver() As Boolean
  
  ValidatePAN_Ver = True
- verPAN = ThisComponent.Sheets(2-1).getCellRangeByName("Ver.PAN").String
+ verPAN = ThisComponent.Sheets(2).getCellRangeByName("Ver.PAN").String
  PAN_1 = ThisComponent.Sheets(1-1).getCellRangeByName("sheet1.PAN").String
  Dim tempPAN_1 As String
  tempPAN_1 = PAN_1
@@ -1700,7 +1700,7 @@ End Function
 Function ValidateNameOfTRP_Ver() As Boolean
  
  ValidateNameOfTRP_Ver = True
- NameOfTRP_Ver = ThisComponent.Sheets(2-1).getCellRangeByName("Ver.NameOfTRP").String
+ NameOfTRP_Ver = ThisComponent.Sheets(2).getCellRangeByName("Ver.NameOfTRP").String
      If Not chkCompulsory(NameOfTRP_Ver) Then
          msgbox_Ver ("NameOfTRP in Sheet Taxes paid and Verification  is Compulsory")
          ValidateNameOfTRP_Ver = False
@@ -1716,7 +1716,7 @@ End Function
 
 Function ValidateReImbFrmGov_Ver() As Boolean
  ValidateReImbFrmGov_Ver = True
- ReImbFrmGov_Ver = ThisComponent.Sheets(2-1).getCellRangeByName("Ver.ReImbFrmGov").Value
+ ReImbFrmGov_Ver = ThisComponent.Sheets(2).getCellRangeByName("Ver.ReImbFrmGov").Value
  If Not chkCompulsory(ReImbFrmGov_Ver) Then
          msgbox_Ver ("ReImbFrmGov in Sheet Taxes paid and Verification  is Compulsory")
          ValidateReImbFrmGov_Ver = False
@@ -2097,15 +2097,15 @@ Sub Create_XML()
 On Error Resume Next
 intVariables
 Validateshts
-Sheet4.Visible = xlSheetVisible
-ThisComponent.CurrentController.setActiveSheet(ThisComponent.Sheets(4-1))
+ThisComponent.Sheets(5).isVisible = True
+ThisComponent.CurrentController.setActiveSheet(ThisComponent.Sheets(3))
 msginit21 = Module3.getmsgstate
 
 strpassword = msginit21 + "*"
 ThisComponent.CurrentController.getActiveSheet.Unprotect Password:=strpassword
-ThisComponent.Sheets(4-1).getCellRangeByName("tds1").Value = UBound(TAN_TDSal)
-ThisComponent.Sheets(4-1).getCellRangeByName("tds2").Value = UBound(TAN_TDSoth)
-ThisComponent.Sheets(4-1).getCellRangeByName("tp").Value = UBound(BSRCode_TaxP)
+ThisComponent.Sheets(5).getCellRangeByName("tds1").Value = UBound(TAN_TDSal)
+ThisComponent.Sheets(5).getCellRangeByName("tds2").Value = UBound(TAN_TDSoth)
+ThisComponent.Sheets(5).getCellRangeByName("tp").Value = UBound(BSRCode_TaxP)
 
 ThisComponent.CurrentController.getActiveSheet.Protect Password:=strpassword
 MsgBox "To compute Tax and Interest using this utllity, you must click on Compute Tax button and verify the figures before saving the XML. If you have not done so, please do it and then again Generate XML", vbInformation, "Compute Tax"

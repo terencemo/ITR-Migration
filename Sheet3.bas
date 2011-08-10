@@ -4,13 +4,13 @@ Private Sub cmdGenerate_Click()
 Module3.Create_XML
 End Sub
 Private Sub cmdNext_Click()
-    Sheet2.Activate
+    ThisComponent.CurrentController.setActiveSheet(ThisComponent.Sheets(1))
 
 End Sub
 
 
 Private Sub cmdPrev_Click()
-    Sheet1.Activate
+    ThisComponent.CurrentController.setActiveSheet(ThisComponent.Sheets(0))
 
 End Sub
 

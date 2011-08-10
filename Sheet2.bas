@@ -5,10 +5,10 @@ Module3.Create_XML
 End Sub
 
 Private Sub cmdNext_Click()
-    Sheets("TDS").Activate
+    ThisComponent.CurrentController.setActiveSheet(ThisComponent.Sheets(3-1))
 End Sub
 Private Sub cmdPrev_Click()
-Sheet3.Activate
+    ThisComponent.CurrentController.setActiveSheet(ThisComponent.Sheets(0))
 End Sub
 
 Private Sub cmdHelp_Click()

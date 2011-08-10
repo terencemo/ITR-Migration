@@ -22,7 +22,7 @@ End Sub
 
 
 Private Sub cmdNext_Click()
-Sheet3.Activate
+ThisComponent.CurrentController.setActiveSheet(ThisComponent.Sheets(1))
 End Sub
 
 Private Sub cmdHelp_Click()

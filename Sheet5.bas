@@ -3,9 +3,9 @@ Option VBASupport 1
 Public Sub cmdInterest_Click()
 On Error Resume Next
 msginit21 = Module3.getmsgstate
-Sheet5.Unprotect msginit21 + "*"
+ThisComponent.CurrentController.getActiveSheet.Unprotect msginit21 + "*"
 Module4.COMPUTE_INTEREST
-Sheet5.Protect msginit21 + "*"
+ThisComponent.CurrentController.getActiveSheet.Protect msginit21 + "*"
 End Sub
 Public Sub cmdInterestTransfer_Click()
 On Error Resume Next
@@ -15,15 +15,15 @@ ThisComponent.Sheets(1-1).getCellRangeByName("IncD.IntrstPayUs234C").value = Thi
 ThisComponent.Sheets(1-1).getCellRangeByName("IncD.TotalIntrstPay").value = ThisComponent.Sheets(5-1).getCellRangeByName("Calc_234A").value + _
     ThisComponent.Sheets(5-1).getCellRangeByName("Calc_234B").value + ThisComponent.Sheets(5-1).getCellRangeByName("Calc_234C").value
 msginit21 = Module3.getmsgstate
-Sheet1.Protect msginit21 + "*"
-Sheet5.Protect msginit21 + "*"
+ThisComponent.Sheets(0).Protect msginit21 + "*"
+ThisComponent.CurrentController.getActiveSheet.Protect msginit21 + "*"
 End Sub
 Public Sub cmdTax_Click()
 On Error Resume Next
 msginit21 = Module3.getmsgstate
-Sheet5.Unprotect msginit21 + "*"
+ThisComponent.CurrentController.getActiveSheet.Unprotect msginit21 + "*"
 Module2.calc_TaxatNormalRate
-Sheet5.Protect msginit21 + "*"
+ThisComponent.CurrentController.getActiveSheet.Protect msginit21 + "*"
 End Sub
 Public Sub cmdTaxTransfer_Click()
 On Error Resume Next
