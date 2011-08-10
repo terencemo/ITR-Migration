@@ -3212,7 +3212,7 @@ End Function
 
 Function ValidateStateCode_1() As Boolean
 ValidateStateCode_1 = True
- StateCode_1 = ThisComponent.Sheets(1-1).getCellRangeByName("sheet1.StateCode1").Value
+ StateCode_1 = ThisComponent.Sheets(1-1).getCellRangeByName("sheet1.StateCode1").String
  StateCode_1 = Mid(StateCode_1, 1, 2)
 If StateCode_1 = "" Or IsEmpty(StateCode_1) Then
 msgbox1 ("State in Sheet : Income Details  is Compulsory")
@@ -3246,7 +3246,7 @@ End Function
 
 Function ValidateSTDcode_1() As Boolean
 ValidateSTDcode_1 = True
- STDcode_1 = ThisComponent.Sheets(1-1).getCellRangeByName("sheet1.STDcode").Value
+ STDcode_1 = ThisComponent.Sheets(1-1).getCellRangeByName("sheet1.STDcode").String
 If Len(STDcode_1) > 5 Then
  msgbox1 ("STDcode in Sheet : Income Details  should be at most 5 digits")
 ValidateSTDcode_1 = False
